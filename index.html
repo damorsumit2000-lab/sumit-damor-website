@@ -118,7 +118,6 @@
             border-radius: 15px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
         }
 
         .blog-card:hover {
@@ -142,44 +141,7 @@
             color: #666;
         }
 
-        .blog-actions {
-            display: none;
-            gap: 0.5rem;
-            margin-top: 1rem;
-        }
-
-        .blog-card.admin-mode .blog-actions {
-            display: flex;
-        }
-
-        .btn-edit, .btn-delete {
-            padding: 0.5rem 1rem;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .btn-edit {
-            background: #4A90E2;
-            color: white;
-        }
-
-        .btn-edit:hover {
-            background: #357ABD;
-        }
-
-        .btn-delete {
-            background: #e74c3c;
-            color: white;
-        }
-
-        .btn-delete:hover {
-            background: #c0392b;
-        }
-
-        .contact-form, .blog-form, .login-form {
+        .contact-form {
             max-width: 600px;
             margin: 0 auto;
         }
@@ -235,89 +197,6 @@
             transform: translateY(-2px);
         }
 
-        .admin-toggle {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            background: var(--accent);
-            color: white;
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 50px;
-            font-weight: 600;
-            cursor: pointer;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-            transition: all 0.3s ease;
-            z-index: 999;
-        }
-
-        .admin-toggle:hover {
-            background: #357ABD;
-            transform: scale(1.05);
-        }
-
-        .admin-panel {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.8);
-            z-index: 2000;
-            overflow-y: auto;
-        }
-
-        .admin-panel.active {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-        }
-
-        .admin-content {
-            background: white;
-            padding: 3rem;
-            border-radius: 20px;
-            max-width: 600px;
-            width: 100%;
-            position: relative;
-        }
-
-        .close-admin {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: #e74c3c;
-            color: white;
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-
-        .close-admin:hover {
-            background: #c0392b;
-        }
-
-        .logout-btn {
-            background: #e74c3c;
-            color: white;
-            padding: 0.5rem 1.5rem;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            margin-bottom: 1rem;
-            font-weight: 600;
-        }
-
-        .logout-btn:hover {
-            background: #c0392b;
-        }
-
         footer {
             text-align: center;
             padding: 2rem;
@@ -356,28 +235,6 @@
             border: 1px solid #f5c6cb;
         }
 
-        .firebase-config-notice {
-            background: #fff3cd;
-            border: 2px solid #ffc107;
-            padding: 1.5rem;
-            border-radius: 10px;
-            margin-bottom: 2rem;
-            text-align: center;
-        }
-
-        .firebase-config-notice h3 {
-            color: #856404;
-            margin-bottom: 0.5rem;
-        }
-
-        #loginView, #adminView {
-            display: none;
-        }
-
-        #loginView.active, #adminView.active {
-            display: block;
-        }
-
         @media (max-width: 768px) {
             .hero h1 {
                 font-size: 2.5rem;
@@ -388,11 +245,6 @@
             section {
                 margin: 2rem 1rem;
                 padding: 2rem 1rem;
-            }
-            .admin-toggle {
-                bottom: 1rem;
-                right: 1rem;
-                padding: 0.8rem 1.5rem;
             }
         }
     </style>
@@ -456,61 +308,9 @@
         <p>Built with ❤️ and Firebase</p>
     </footer>
 
-    <!-- Admin Toggle Button -->
-    <button class="admin-toggle" id="adminToggle">🔒 Admin</button>
-
-    <!-- Admin Panel -->
-    <div class="admin-panel" id="adminPanel">
-        <div class="admin-content">
-            <button class="close-admin" id="closeAdmin">×</button>
-            
-            <!-- Login View -->
-            <div id="loginView" class="active">
-                <h2 style="color: var(--accent); margin-bottom: 2rem; text-align: center;">Admin Login</h2>
-                <form class="login-form" id="loginForm">
-                    <div class="form-group">
-                        <label for="adminPassword">Password</label>
-                        <input type="password" id="adminPassword" name="adminPassword" required placeholder="Enter admin password">
-                    </div>
-                    <button type="submit" class="submit-btn">Login</button>
-                    <div class="status-message" id="loginStatusMessage"></div>
-                </form>
-                <p style="margin-top: 1rem; text-align: center; color: #666; font-size: 0.9rem;">
-                    Default password: <strong>sumit2025</strong><br>
-                    (Change this in the code for security)
-                </p>
-            </div>
-
-            <!-- Admin View -->
-            <div id="adminView">
-                <button class="logout-btn" id="logoutBtn">Logout</button>
-                <h2 style="color: var(--accent); margin-bottom: 2rem; text-align: center;">Blog Management</h2>
-                
-                <div class="firebase-config-notice" id="firebaseNotice">
-                    <h3>⚠️ Firebase Not Configured</h3>
-                    <p>Please add your Firebase configuration to enable blog management.</p>
-                </div>
-
-                <form class="blog-form" id="blogForm">
-                    <input type="hidden" id="editBlogId">
-                    <div class="form-group">
-                        <label for="blogTitle">Blog Title</label>
-                        <input type="text" id="blogTitle" name="blogTitle" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="blogContent">Blog Content</label>
-                        <textarea id="blogContent" name="blogContent" required></textarea>
-                    </div>
-                    <button type="submit" class="submit-btn" id="blogSubmitBtn">Add Blog Post</button>
-                    <div class="status-message" id="blogStatusMessage"></div>
-                </form>
-            </div>
-        </div>
-    </div>
-
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
-        import { getFirestore, collection, addDoc, getDocs, query, orderBy, deleteDoc, doc, updateDoc } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+        import { getFirestore, collection, addDoc, getDocs, query, orderBy } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 
         const firebaseConfig = {
             apiKey: "YOUR_API_KEY",
@@ -521,12 +321,8 @@
             appId: "YOUR_APP_ID"
         };
 
-        // CHANGE THIS PASSWORD FOR SECURITY!
-        const ADMIN_PASSWORD = "sumit2025";
-
         let app, db;
         let isFirebaseConfigured = false;
-        let isLoggedIn = false;
 
         try {
             if (firebaseConfig.apiKey !== "YOUR_API_KEY") {
@@ -534,87 +330,38 @@
                 db = getFirestore(app);
                 isFirebaseConfigured = true;
                 console.log("Firebase initialized successfully!");
-                document.getElementById('firebaseNotice').style.display = 'none';
                 loadBlogs();
+                trackVisitor();
             }
         } catch (error) {
             console.log("Firebase not configured yet.");
         }
 
-        // Check if already logged in (session storage)
-        if (sessionStorage.getItem('adminLoggedIn') === 'true') {
-            isLoggedIn = true;
-        }
-
-        // Admin Panel Toggle
-        document.getElementById('adminToggle').addEventListener('click', () => {
-            document.getElementById('adminPanel').classList.add('active');
-            if (isLoggedIn) {
-                showAdminView();
-            } else {
-                showLoginView();
-            }
-        });
-
-        document.getElementById('closeAdmin').addEventListener('click', () => {
-            document.getElementById('adminPanel').classList.remove('active');
-            resetBlogForm();
-        });
-
-        // Close admin panel when clicking outside
-        document.getElementById('adminPanel').addEventListener('click', (e) => {
-            if (e.target.id === 'adminPanel') {
-                document.getElementById('adminPanel').classList.remove('active');
-                resetBlogForm();
-            }
-        });
-
-        // Login Form
-        document.getElementById('loginForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const password = document.getElementById('adminPassword').value;
+        // Track visitor
+        async function trackVisitor() {
+            if (!db) return;
             
-            if (password === ADMIN_PASSWORD) {
-                isLoggedIn = true;
-                sessionStorage.setItem('adminLoggedIn', 'true');
-                showAdminView();
-                document.getElementById('adminPassword').value = '';
-                showLoginStatus('Login successful!', 'success');
-            } else {
-                showLoginStatus('Incorrect password!', 'error');
+            try {
+                const today = new Date().toISOString().split('T')[0];
+                const visitorId = localStorage.getItem('visitorId') || generateVisitorId();
+                localStorage.setItem('visitorId', visitorId);
+
+                await addDoc(collection(db, "visitors"), {
+                    visitorId: visitorId,
+                    date: today,
+                    timestamp: new Date().toISOString(),
+                    userAgent: navigator.userAgent
+                });
+            } catch (error) {
+                console.log("Error tracking visitor:", error);
             }
-        });
-
-        // Logout
-        document.getElementById('logoutBtn').addEventListener('click', () => {
-            isLoggedIn = false;
-            sessionStorage.removeItem('adminLoggedIn');
-            showLoginView();
-            showLoginStatus('Logged out successfully!', 'success');
-        });
-
-        function showLoginView() {
-            document.getElementById('loginView').classList.add('active');
-            document.getElementById('adminView').classList.remove('active');
         }
 
-        function showAdminView() {
-            document.getElementById('loginView').classList.remove('active');
-            document.getElementById('adminView').classList.add('active');
+        function generateVisitorId() {
+            return 'visitor_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
         }
 
-        function showLoginStatus(message, type) {
-            const statusDiv = document.getElementById('loginStatusMessage');
-            statusDiv.textContent = message;
-            statusDiv.className = `status-message ${type}`;
-            statusDiv.style.display = 'block';
-            
-            setTimeout(() => {
-                statusDiv.style.display = 'none';
-            }, 3000);
-        }
-
-        // Load blogs from Firebase
+        // Load blogs
         async function loadBlogs() {
             if (!db) return;
             
@@ -626,7 +373,7 @@
                 blogContainer.innerHTML = '';
                 
                 if (querySnapshot.empty) {
-                    blogContainer.innerHTML = '<div class="blog-card"><h3>No blogs yet</h3><p>Use the Admin panel to add your first blog post!</p></div>';
+                    blogContainer.innerHTML = '<div class="blog-card"><h3>No blogs yet</h3><p>Check back soon for new content!</p></div>';
                     return;
                 }
                 
@@ -634,7 +381,6 @@
                     const blog = docSnap.data();
                     const blogCard = document.createElement('div');
                     blogCard.className = 'blog-card';
-                    blogCard.setAttribute('data-id', docSnap.id);
                     
                     const dateStr = blog.date ? new Date(blog.date).toLocaleDateString() : 'No date';
                     
@@ -642,10 +388,6 @@
                         <h3>${blog.title}</h3>
                         <p>${blog.content}</p>
                         <p class="date">Date: ${dateStr}</p>
-                        <div class="blog-actions">
-                            <button class="btn-edit" onclick="editBlog('${docSnap.id}', '${blog.title.replace(/'/g, "\\'")}', '${blog.content.replace(/'/g, "\\'")}')">Edit</button>
-                            <button class="btn-delete" onclick="deleteBlog('${docSnap.id}')">Delete</button>
-                        </div>
                     `;
                     blogContainer.appendChild(blogCard);
                 });
@@ -654,98 +396,7 @@
             }
         }
 
-        // Add/Update Blog
-        document.getElementById('blogForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            if (!isFirebaseConfigured) {
-                showBlogStatus('Please configure Firebase first!', 'error');
-                return;
-            }
-
-            const title = document.getElementById('blogTitle').value;
-            const content = document.getElementById('blogContent').value;
-            const editId = document.getElementById('editBlogId').value;
-
-            try {
-                if (editId) {
-                    await updateDoc(doc(db, "blogs", editId), {
-                        title: title,
-                        content: content,
-                        date: new Date().toISOString()
-                    });
-                    showBlogStatus('Blog updated successfully!', 'success');
-                } else {
-                    await addDoc(collection(db, "blogs"), {
-                        title: title,
-                        content: content,
-                        date: new Date().toISOString()
-                    });
-                    showBlogStatus('Blog added successfully!', 'success');
-                }
-
-                resetBlogForm();
-                loadBlogs();
-                
-                setTimeout(() => {
-                    document.getElementById('adminPanel').classList.remove('active');
-                }, 2000);
-            } catch (error) {
-                showBlogStatus('Error saving blog. Please try again.', 'error');
-                console.error("Error:", error);
-            }
-        });
-
-        // Edit Blog
-        window.editBlog = function(id, title, content) {
-            if (!isLoggedIn) {
-                alert('Please login first!');
-                return;
-            }
-            document.getElementById('editBlogId').value = id;
-            document.getElementById('blogTitle').value = title;
-            document.getElementById('blogContent').value = content;
-            document.getElementById('blogSubmitBtn').textContent = 'Update Blog Post';
-            document.getElementById('adminPanel').classList.add('active');
-            showAdminView();
-        };
-
-        // Delete Blog
-        window.deleteBlog = async function(id) {
-            if (!isLoggedIn) {
-                alert('Please login first!');
-                return;
-            }
-            if (!confirm('Are you sure you want to delete this blog post?')) return;
-            
-            try {
-                await deleteDoc(doc(db, "blogs", id));
-                showBlogStatus('Blog deleted successfully!', 'success');
-                loadBlogs();
-            } catch (error) {
-                showBlogStatus('Error deleting blog.', 'error');
-                console.error("Error:", error);
-            }
-        };
-
-        function resetBlogForm() {
-            document.getElementById('blogForm').reset();
-            document.getElementById('editBlogId').value = '';
-            document.getElementById('blogSubmitBtn').textContent = 'Add Blog Post';
-        }
-
-        function showBlogStatus(message, type) {
-            const statusDiv = document.getElementById('blogStatusMessage');
-            statusDiv.textContent = message;
-            statusDiv.className = `status-message ${type}`;
-            statusDiv.style.display = 'block';
-            
-            setTimeout(() => {
-                statusDiv.style.display = 'none';
-            }, 5000);
-        }
-
-        // Contact form submission
+        // Contact form
         document.getElementById('contactForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             
