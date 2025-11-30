@@ -179,7 +179,7 @@
             background: #c0392b;
         }
 
-        .contact-form, .blog-form {
+        .contact-form, .blog-form, .login-form {
             max-width: 600px;
             margin: 0 auto;
         }
@@ -303,6 +303,21 @@
             background: #c0392b;
         }
 
+        .logout-btn {
+            background: #e74c3c;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .logout-btn:hover {
+            background: #c0392b;
+        }
+
         footer {
             text-align: center;
             padding: 2rem;
@@ -353,6 +368,14 @@
         .firebase-config-notice h3 {
             color: #856404;
             margin-bottom: 0.5rem;
+        }
+
+        #loginView, #adminView {
+            display: none;
+        }
+
+        #loginView.active, #adminView.active {
+            display: block;
         }
 
         @media (max-width: 768px) {
@@ -434,32 +457,54 @@
     </footer>
 
     <!-- Admin Toggle Button -->
-    <button class="admin-toggle" id="adminToggle">✏️ Admin</button>
+    <button class="admin-toggle" id="adminToggle">🔒 Admin</button>
 
     <!-- Admin Panel -->
     <div class="admin-panel" id="adminPanel">
         <div class="admin-content">
             <button class="close-admin" id="closeAdmin">×</button>
-            <h2 style="color: var(--accent); margin-bottom: 2rem; text-align: center;">Blog Management</h2>
             
-            <div class="firebase-config-notice" id="firebaseNotice">
-                <h3>⚠️ Firebase Not Configured</h3>
-                <p>Please add your Firebase configuration to enable blog management.</p>
+            <!-- Login View -->
+            <div id="loginView" class="active">
+                <h2 style="color: var(--accent); margin-bottom: 2rem; text-align: center;">Admin Login</h2>
+                <form class="login-form" id="loginForm">
+                    <div class="form-group">
+                        <label for="adminPassword">Password</label>
+                        <input type="password" id="adminPassword" name="adminPassword" required placeholder="Enter admin password">
+                    </div>
+                    <button type="submit" class="submit-btn">Login</button>
+                    <div class="status-message" id="loginStatusMessage"></div>
+                </form>
+                <p style="margin-top: 1rem; text-align: center; color: #666; font-size: 0.9rem;">
+                    Default password: <strong>sumit2025</strong><br>
+                    (Change this in the code for security)
+                </p>
             </div>
 
-            <form class="blog-form" id="blogForm">
-                <input type="hidden" id="editBlogId">
-                <div class="form-group">
-                    <label for="blogTitle">Blog Title</label>
-                    <input type="text" id="blogTitle" name="blogTitle" required>
+            <!-- Admin View -->
+            <div id="adminView">
+                <button class="logout-btn" id="logoutBtn">Logout</button>
+                <h2 style="color: var(--accent); margin-bottom: 2rem; text-align: center;">Blog Management</h2>
+                
+                <div class="firebase-config-notice" id="firebaseNotice">
+                    <h3>⚠️ Firebase Not Configured</h3>
+                    <p>Please add your Firebase configuration to enable blog management.</p>
                 </div>
-                <div class="form-group">
-                    <label for="blogContent">Blog Content</label>
-                    <textarea id="blogContent" name="blogContent" required></textarea>
-                </div>
-                <button type="submit" class="submit-btn" id="blogSubmitBtn">Add Blog Post</button>
-                <div class="status-message" id="blogStatusMessage"></div>
-            </form>
+
+                <form class="blog-form" id="blogForm">
+                    <input type="hidden" id="editBlogId">
+                    <div class="form-group">
+                        <label for="blogTitle">Blog Title</label>
+                        <input type="text" id="blogTitle" name="blogTitle" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="blogContent">Blog Content</label>
+                        <textarea id="blogContent" name="blogContent" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn" id="blogSubmitBtn">Add Blog Post</button>
+                    <div class="status-message" id="blogStatusMessage"></div>
+                </form>
+            </div>
         </div>
     </div>
 
@@ -476,8 +521,12 @@
             appId: "YOUR_APP_ID"
         };
 
-        let app, db, isAdminMode = false;
+        // CHANGE THIS PASSWORD FOR SECURITY!
+        const ADMIN_PASSWORD = "sumit2025";
+
+        let app, db;
         let isFirebaseConfigured = false;
+        let isLoggedIn = false;
 
         try {
             if (firebaseConfig.apiKey !== "YOUR_API_KEY") {
@@ -492,9 +541,19 @@
             console.log("Firebase not configured yet.");
         }
 
+        // Check if already logged in (session storage)
+        if (sessionStorage.getItem('adminLoggedIn') === 'true') {
+            isLoggedIn = true;
+        }
+
         // Admin Panel Toggle
         document.getElementById('adminToggle').addEventListener('click', () => {
             document.getElementById('adminPanel').classList.add('active');
+            if (isLoggedIn) {
+                showAdminView();
+            } else {
+                showLoginView();
+            }
         });
 
         document.getElementById('closeAdmin').addEventListener('click', () => {
@@ -509,6 +568,51 @@
                 resetBlogForm();
             }
         });
+
+        // Login Form
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const password = document.getElementById('adminPassword').value;
+            
+            if (password === ADMIN_PASSWORD) {
+                isLoggedIn = true;
+                sessionStorage.setItem('adminLoggedIn', 'true');
+                showAdminView();
+                document.getElementById('adminPassword').value = '';
+                showLoginStatus('Login successful!', 'success');
+            } else {
+                showLoginStatus('Incorrect password!', 'error');
+            }
+        });
+
+        // Logout
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            isLoggedIn = false;
+            sessionStorage.removeItem('adminLoggedIn');
+            showLoginView();
+            showLoginStatus('Logged out successfully!', 'success');
+        });
+
+        function showLoginView() {
+            document.getElementById('loginView').classList.add('active');
+            document.getElementById('adminView').classList.remove('active');
+        }
+
+        function showAdminView() {
+            document.getElementById('loginView').classList.remove('active');
+            document.getElementById('adminView').classList.add('active');
+        }
+
+        function showLoginStatus(message, type) {
+            const statusDiv = document.getElementById('loginStatusMessage');
+            statusDiv.textContent = message;
+            statusDiv.className = `status-message ${type}`;
+            statusDiv.style.display = 'block';
+            
+            setTimeout(() => {
+                statusDiv.style.display = 'none';
+            }, 3000);
+        }
 
         // Load blogs from Firebase
         async function loadBlogs() {
@@ -565,7 +669,6 @@
 
             try {
                 if (editId) {
-                    // Update existing blog
                     await updateDoc(doc(db, "blogs", editId), {
                         title: title,
                         content: content,
@@ -573,7 +676,6 @@
                     });
                     showBlogStatus('Blog updated successfully!', 'success');
                 } else {
-                    // Add new blog
                     await addDoc(collection(db, "blogs"), {
                         title: title,
                         content: content,
@@ -596,15 +698,24 @@
 
         // Edit Blog
         window.editBlog = function(id, title, content) {
+            if (!isLoggedIn) {
+                alert('Please login first!');
+                return;
+            }
             document.getElementById('editBlogId').value = id;
             document.getElementById('blogTitle').value = title;
             document.getElementById('blogContent').value = content;
             document.getElementById('blogSubmitBtn').textContent = 'Update Blog Post';
             document.getElementById('adminPanel').classList.add('active');
+            showAdminView();
         };
 
         // Delete Blog
         window.deleteBlog = async function(id) {
+            if (!isLoggedIn) {
+                alert('Please login first!');
+                return;
+            }
             if (!confirm('Are you sure you want to delete this blog post?')) return;
             
             try {
