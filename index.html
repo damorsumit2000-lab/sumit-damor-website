@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sumit Damor - Personal Blog & Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --light-blue: #87CEEB;
+            --cream: #FFF8DC;
+            --white: #FFFFFF;
+            --dark-text: #2C3E50;
+            --accent: #4A90E2;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--cream) 0%, var(--white) 50%, var(--light-blue) 100%);
+            color: var(--dark-text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--dark-text);
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        .hero {
+            margin-top: 80px;
+            padding: 6rem 2rem;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(135, 206, 235, 0.2), rgba(255, 248, 220, 0.3));
+            border-radius: 20px;
+            margin: 100px 2rem 2rem 2rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            color: var(--dark-text);
+            animation: fadeInUp 1.2s ease;
+        }
+
+        section {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 3rem 2rem;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        section h2 {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .about-content {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .blog-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .blog-card {
+            background: linear-gradient(135deg, var(--light-blue) 0%, var(--cream) 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .blog-card h3 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .blog-card p {
+            color: var(--dark-text);
+            margin-bottom: 1rem;
+        }
+
+        .blog-card .date {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark-text);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--light-blue);
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            background: var(--white);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: var(--accent);
+            color: white;
+            padding: 1rem 3rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background: #357ABD;
+            transform: translateY(-2px);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.9);
+            margin-top: 4rem;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .firebase-setup {
+            background: linear-gradient(135deg, #FFF8DC 0%, #87CEEB 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            border-left: 5px solid var(--accent);
+        }
+
+        .firebase-setup h3 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .firebase-setup ol {
+            margin-left: 2rem;
+            line-height: 2;
+        }
+
+        .firebase-setup code {
+            background: rgba(0,0,0,0.1);
+            padding: 0.2rem 0.5rem;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .status-message {
+            padding: 1rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+            text-align: center;
+            display: none;
+        }
+
+        .status-message.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .status-message.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            nav ul {
+                gap: 1.5rem;
+            }
+            section {
+                margin: 2rem 1rem;
+                padding: 2rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#blog">Blog</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="hero" id="home">
+        <h1>Sumit Damor</h1>
+        <p>Welcome to my personal space on the web</p>
+    </div>
+
+    <section>
+        <h2>🔥 Firebase Setup Instructions</h2>
+        <div class="firebase-setup">
+            <h3>Step 1: Create a Firebase Project</h3>
+            <ol>
+                <li>Go to <a href="https://console.firebase.google.com/" target="_blank">Firebase Console</a></li>
+                <li>Click "Add Project" and name it (e.g., "sumit-damor-blog")</li>
+                <li>Follow the setup wizard</li>
+            </ol>
+
+            <h3>Step 2: Register Your Web App</h3>
+            <ol>
+                <li>In your Firebase project, click the web icon (&lt;/&gt;)</li>
+                <li>Register your app with a nickname</li>
+                <li>Copy the Firebase configuration object</li>
+            </ol>
+
+            <h3>Step 3: Enable Firestore Database</h3>
+            <ol>
+                <li>In Firebase Console, go to "Firestore Database"</li>
+                <li>Click "Create Database"</li>
+                <li>Start in "Test Mode"</li>
+                <li>Choose a location closest to you</li>
+            </ol>
+
+            <h3>Step 4: Add Your Firebase Config</h3>
+            <p>Replace the <code>firebaseConfig</code> object in the script with your actual Firebase configuration</p>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2>About Me</h2>
+        <div class="about-content">
+            <p>Hello! I'm Sumit Damor, and this is my personal corner of the internet where I share my thoughts, experiences, and insights through my blog.</p>
+            <p>This website is built with modern web technologies and integrated with Firebase for real-time data management.</p>
+        </div>
+    </section>
+
+    <section id="blog">
+        <h2>My Blog</h2>
+        <div class="blog-container" id="blogContainer">
+            <div class="blog-card">
+                <h3>Welcome to My Blog!</h3>
+                <p>This is a sample blog post. Once you set up Firebase, your blog posts will appear here dynamically.</p>
+                <p class="date">Date: December 1, 2025</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Get In Touch</h2>
+        <form class="contact-form" id="contactForm">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Send Message</button>
+            <div class="status-message" id="statusMessage"></div>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Sumit Damor. All rights reserved.</p>
+        <p>Built with ❤️ and Firebase</p>
+    </footer>
+
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+        import { getFirestore, collection, addDoc, getDocs, query, orderBy } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_PROJECT_ID.appspot.com",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        let app, db;
+        try {
+            app = initializeApp(firebaseConfig);
+            db = getFirestore(app);
+            console.log("Firebase initialized successfully!");
+            loadBlogs();
+        } catch (error) {
+            console.log("Firebase not configured yet.");
+        }
+
+        async function loadBlogs() {
+            if (!db) return;
+            try {
+                const blogsQuery = query(collection(db, "blogs"), orderBy("date", "desc"));
+                const querySnapshot = await getDocs(blogsQuery);
+                if (!querySnapshot.empty) {
+                    const blogContainer = document.getElementById('blogContainer');
+                    blogContainer.innerHTML = '';
+                    querySnapshot.forEach((doc) => {
+                        const blog = doc.data();
+                        const blogCard = document.createElement('div');
+                        blogCard.className = 'blog-card';
+                        blogCard.innerHTML = `
+                            <h3>${blog.title}</h3>
+                            <p>${blog.content}</p>
+                            <p class="date">Date: ${new Date(blog.date).toLocaleDateString()}</p>
+                        `;
+                        blogContainer.appendChild(blogCard);
+                    });
+                }
+            } catch (error) {
+                console.log("Error loading blogs:", error);
+            }
+        }
+
+        document.getElementById('contactForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if (!db) {
+                showStatus('Please configure Firebase first!', 'error');
+                return;
+            }
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            try {
+                await addDoc(collection(db, "contacts"), {
+                    name: name,
+                    email: email,
+                    message: message,
+                    timestamp: new Date().toISOString()
+                });
+                showStatus('Message sent successfully!', 'success');
+                document.getElementById('contactForm').reset();
+            } catch (error) {
+                showStatus('Error sending message.', 'error');
+            }
+        });
+
+        function showStatus(message, type) {
+            const statusDiv = document.getElementById('statusMessage');
+            statusDiv.textContent = message;
+            statusDiv.className = `status-message ${type}`;
+            statusDiv.style.display = 'block';
+            setTimeout(() => {
+                statusDiv.style.display = 'none';
+            }, 5000);
+        }
+
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+</body>
+</html>
