@@ -35,7 +35,7 @@
         nav {
             background: rgba(10, 10, 10, 0.95);
             backdrop-filter: blur(20px);
-            padding: 1.5rem 4rem;
+            padding: 1.5rem 2rem;
             position: fixed;
             width: 100%;
             top: 0;
@@ -51,6 +51,42 @@
             align-items: center;
         }
 
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            width: 30px;
+            height: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            width: 100%;
+            height: 2px;
+            background: var(--accent-gold);
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(8px, -8px);
+        }
+
         .logo {
             font-family: 'Playfair Display', serif;
             font-size: 1.8rem;
@@ -59,13 +95,112 @@
             letter-spacing: 2px;
         }
 
-        nav ul {
+        /* Drawer */
+        .drawer {
+            position: fixed;
+            top: 0;
+            left: -400px;
+            width: 400px;
+            height: 100vh;
+            background: var(--secondary-dark);
+            border-right: 1px solid var(--border-color);
+            transition: left 0.4s ease;
+            z-index: 999;
+            overflow-y: auto;
+        }
+
+        .drawer.active {
+            left: 0;
+        }
+
+        .drawer-content {
+            padding: 6rem 3rem 3rem;
+        }
+
+        .drawer-header {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .drawer-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--accent-gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .drawer-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            letter-spacing: 1px;
+        }
+
+        .drawer-menu {
             list-style: none;
+        }
+
+        .drawer-menu li {
+            margin-bottom: 0.5rem;
+        }
+
+        .drawer-menu a {
+            display: block;
+            padding: 1rem 1.5rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .drawer-menu a:hover {
+            color: var(--accent-gold);
+            background: rgba(212, 175, 55, 0.05);
+            border-left-color: var(--accent-gold);
+            padding-left: 2rem;
+        }
+
+        .drawer-footer {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .drawer-footer p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Overlay */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 998;
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Desktop Menu (hidden on mobile) */
+        .desktop-menu {
             display: flex;
+            list-style: none;
             gap: 3rem;
         }
 
-        nav a {
+        .desktop-menu a {
             text-decoration: none;
             color: var(--text-secondary);
             font-weight: 400;
@@ -76,7 +211,7 @@
             position: relative;
         }
 
-        nav a::after {
+        .desktop-menu a::after {
             content: '';
             position: absolute;
             bottom: -5px;
@@ -87,11 +222,11 @@
             transition: width 0.3s ease;
         }
 
-        nav a:hover {
+        .desktop-menu a:hover {
             color: var(--accent-gold);
         }
 
-        nav a:hover::after {
+        .desktop-menu a:hover::after {
             width: 100%;
         }
 
@@ -504,6 +639,15 @@
 
         /* Responsive */
         @media (max-width: 1024px) {
+            .desktop-menu {
+                display: none;
+            }
+
+            .drawer {
+                width: 320px;
+                left: -320px;
+            }
+
             nav {
                 padding: 1.5rem 2rem;
             }
@@ -527,12 +671,13 @@
         }
 
         @media (max-width: 768px) {
-            nav ul {
-                gap: 1.5rem;
+            .drawer {
+                width: 280px;
+                left: -280px;
             }
 
-            nav a {
-                font-size: 0.85rem;
+            .drawer-content {
+                padding: 5rem 2rem 2rem;
             }
 
             .hero h1 {
@@ -551,14 +696,27 @@
                 padding: 2rem;
             }
         }
+
+        @media (min-width: 1025px) {
+            .hamburger {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
     <!-- Navigation -->
     <nav>
         <div class="nav-container">
-            <div class="logo">SD</div>
-            <ul>
+            <div class="nav-left">
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <div class="logo">SD</div>
+            </div>
+            <ul class="desktop-menu">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#blog">Insights</a></li>
@@ -566,6 +724,28 @@
             </ul>
         </div>
     </nav>
+
+    <!-- Drawer -->
+    <div class="drawer" id="drawer">
+        <div class="drawer-content">
+            <div class="drawer-header">
+                <div class="drawer-title">Navigation</div>
+                <div class="drawer-subtitle">Explore the portfolio</div>
+            </div>
+            <ul class="drawer-menu">
+                <li><a href="#home" class="drawer-link">Home</a></li>
+                <li><a href="#about" class="drawer-link">About</a></li>
+                <li><a href="#blog" class="drawer-link">Insights</a></li>
+                <li><a href="#contact" class="drawer-link">Contact</a></li>
+            </ul>
+            <div class="drawer-footer">
+                <p>Crafting excellence through thoughtful insights and timeless perspectives.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
 
     <!-- Hero Section -->
     <section class="hero" id="home">
@@ -698,6 +878,32 @@
             console.log("Firebase not configured yet.");
         }
 
+        // Drawer functionality
+        const hamburger = document.getElementById('hamburger');
+        const drawer = document.getElementById('drawer');
+        const overlay = document.getElementById('overlay');
+        const drawerLinks = document.querySelectorAll('.drawer-link');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            drawer.classList.toggle('active');
+            overlay.classList.toggle('active');
+        });
+
+        overlay.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            drawer.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+
+        drawerLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                drawer.classList.remove('active');
+                overlay.classList.remove('active');
+            });
+        });
+
         async function trackVisitor() {
             if (!db) return;
             try {
@@ -795,7 +1001,7 @@
             }, 5000);
         }
 
-        document.querySelectorAll('nav a, .cta-button').forEach(anchor => {
+        document.querySelectorAll('nav a, .cta-button, .drawer-link').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 if (this.getAttribute('href').startsWith('#')) {
                     e.preventDefault();
