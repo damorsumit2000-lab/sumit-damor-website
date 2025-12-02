@@ -32,7 +32,6 @@
             overflow-x: hidden;
         }
 
-        /* Animated Background */
         .bg-gradient {
             position: fixed;
             top: 0;
@@ -52,7 +51,6 @@
             50% { opacity: 0.8; }
         }
 
-        /* Navigation */
         nav {
             background: rgba(15, 15, 15, 0.8);
             backdrop-filter: blur(20px);
@@ -152,7 +150,6 @@
             width: 100%;
         }
 
-        /* Enhanced Drawer */
         .drawer {
             position: fixed;
             top: 0;
@@ -333,7 +330,6 @@
             visibility: visible;
         }
 
-        /* Hero Section */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -425,7 +421,6 @@
             background: rgba(167, 139, 250, 0.1);
         }
 
-        /* Section Styles */
         section {
             padding: 6rem 2rem;
             max-width: 1200px;
@@ -465,7 +460,6 @@
             margin: 0 auto;
         }
 
-        /* Blog Grid */
         .blog-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -565,7 +559,6 @@
             gap: 1rem;
         }
 
-        /* About Section */
         .about-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -616,7 +609,6 @@
             color: var(--text-secondary);
         }
 
-        /* Contact Section */
         .contact-container {
             max-width: 700px;
             margin: 0 auto;
@@ -679,7 +671,6 @@
             box-shadow: 0 10px 30px rgba(167, 139, 250, 0.4);
         }
 
-        /* Footer */
         footer {
             background: var(--bg-card);
             padding: 3rem 2rem;
@@ -730,75 +721,33 @@
             border: 1px solid rgba(244, 114, 182, 0.3);
         }
 
-        /* Responsive */
         @media (max-width: 1024px) {
-            .desktop-menu {
-                display: none;
-            }
-
-            .hero h1 {
-                font-size: 3.5rem;
-            }
-
-            .about-grid {
-                grid-template-columns: 1fr;
-            }
+            .desktop-menu { display: none; }
+            .hero h1 { font-size: 3.5rem; }
+            .about-grid { grid-template-columns: 1fr; }
         }
 
         @media (max-width: 768px) {
-            .drawer {
-                width: 320px;
-                left: -320px;
-            }
-
-            .drawer-header {
-                padding: 2.5rem 2rem 1.5rem;
-            }
-
-            .drawer-title {
-                font-size: 1.8rem;
-            }
-
-            .drawer-menu {
-                padding: 1.5rem 1rem;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-
-            .blog-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .contact-container {
-                padding: 2rem;
-            }
-
-            .cta-buttons {
-                flex-direction: column;
-            }
+            .drawer { width: 320px; left: -320px; }
+            .drawer-header { padding: 2.5rem 2rem 1.5rem; }
+            .drawer-title { font-size: 1.8rem; }
+            .drawer-menu { padding: 1.5rem 1rem; }
+            .hero h1 { font-size: 2.5rem; }
+            .section-title { font-size: 2rem; }
+            .blog-grid { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: 1fr; }
+            .contact-container { padding: 2rem; }
+            .cta-buttons { flex-direction: column; }
         }
 
         @media (min-width: 1025px) {
-            .hamburger {
-                display: none;
-            }
+            .hamburger { display: none; }
         }
     </style>
 </head>
 <body>
     <div class="bg-gradient"></div>
 
-    <!-- Navigation -->
     <nav>
         <div class="nav-container">
             <div class="nav-left">
@@ -818,7 +767,6 @@
         </div>
     </nav>
 
-    <!-- Enhanced Drawer -->
     <div class="drawer" id="drawer">
         <div class="drawer-content">
             <div class="drawer-header">
@@ -826,30 +774,10 @@
                 <div class="drawer-subtitle">Explore my digital space</div>
             </div>
             <ul class="drawer-menu">
-                <li>
-                    <a href="#home" class="drawer-link">
-                        <span class="drawer-menu-icon">🏠</span>
-                        <span>Home</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#about" class="drawer-link">
-                        <span class="drawer-menu-icon">👋</span>
-                        <span>About Me</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#blog" class="drawer-link">
-                        <span class="drawer-menu-icon">📝</span>
-                        <span>Blog Posts</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#contact" class="drawer-link">
-                        <span class="drawer-menu-icon">💬</span>
-                        <span>Contact</span>
-                    </a>
-                </li>
+                <li><a href="#home" class="drawer-link"><span class="drawer-menu-icon">🏠</span><span>Home</span></a></li>
+                <li><a href="#about" class="drawer-link"><span class="drawer-menu-icon">👋</span><span>About Me</span></a></li>
+                <li><a href="#blog" class="drawer-link"><span class="drawer-menu-icon">📝</span><span>Blog Posts</span></a></li>
+                <li><a href="#contact" class="drawer-link"><span class="drawer-menu-icon">💬</span><span>Contact</span></a></li>
             </ul>
             <div class="drawer-footer">
                 <div class="drawer-footer-title">Connect With Me</div>
@@ -866,7 +794,6 @@
 
     <div class="overlay" id="overlay"></div>
 
-    <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="hero-content">
             <div class="hero-badge">✨ Welcome to my digital space</div>
@@ -879,7 +806,6 @@
         </div>
     </section>
 
-    <!-- About Section -->
     <section id="about">
         <div class="section-header">
             <div class="section-badge">About Me</div>
@@ -913,30 +839,15 @@
         </div>
     </section>
 
-    <!-- Blog Section -->
     <section id="blog">
         <div class="section-header">
             <div class="section-badge">Latest Posts</div>
             <h2 class="section-title">Recent Articles</h2>
             <p class="section-description">Fresh content, hot takes, and cool insights 🔥</p>
         </div>
-        <div class="blog-grid" id="blogContainer">
-            <div class="blog-card">
-                <div class="blog-image">📝</div>
-                <div class="blog-content">
-                    <div class="blog-meta">
-                        <span class="blog-date">Dec 1, 2025</span>
-                        <span class="blog-tag">Welcome</span>
-                    </div>
-                    <h3>Welcome to My Blog!</h3>
-                    <p>This is the beginning of something awesome. Stay tuned for amazing content coming your way!</p>
-                    <a href="#" class="read-more">Read More →</a>
-                </div>
-            </div>
-        </div>
+        <div class="blog-grid" id="blogContainer"></div>
     </section>
 
-    <!-- Contact Section -->
     <section id="contact">
         <div class="section-header">
             <div class="section-badge">Get In Touch</div>
@@ -963,43 +874,192 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <div class="footer-logo">SUMIT</div>
-        <p class="footer-text">Creating content that matters. One post at a time. ✨</p>
+        <p class="footer-text">Creating content that matters. One post at a time. ✨<br>💾 Data stored locally on your device</p>
         <div class="footer-bottom">
             <p>&copy; 2025 Sumit Damor. Made with ❤️ and lots of ☕</p>
         </div>
     </footer>
 
     <script type="module">
-        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
-        import { getFirestore, collection, addDoc, getDocs, query, orderBy } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
-
-        const firebaseConfig = {
-            apiKey: "YOUR_API_KEY",
-            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_PROJECT_ID.appspot.com",
-            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-            appId: "YOUR_APP_ID"
-        };
-
-        let app, db;
-        let isFirebaseConfigured = false;
-
-        try {
-            if (firebaseConfig.apiKey !== "YOUR_API_KEY") {
-                app = initializeApp(firebaseConfig);
-                db = getFirestore(app);
-                isFirebaseConfigured = true;
-                loadBlogs();
-                trackVisitor();
+        // LOCAL STORAGE DATABASE SYSTEM
+        class LocalDatabase {
+            constructor() {
+                this.dbName = 'sumitDamorBlog';
             }
-        } catch (error) {
-            console.log("Firebase not configured yet.");
+
+            // Save blogs to local storage
+            saveBlogs(blogs) {
+                localStorage.setItem(`${this.dbName}_blogs`, JSON.stringify(blogs));
+            }
+
+            // Get blogs from local storage
+            getBlogs() {
+                const blogs = localStorage.getItem(`${this.dbName}_blogs`);
+                return blogs ? JSON.parse(blogs) : [];
+            }
+
+            // Add a single blog
+            addBlog(blog) {
+                const blogs = this.getBlogs();
+                blog.id = Date.now().toString();
+                blog.date = new Date().toISOString();
+                blogs.unshift(blog);
+                this.saveBlogs(blogs);
+                return blog;
+            }
+
+            // Save contacts to local storage
+            saveContact(contact) {
+                const contacts = this.getContacts();
+                contact.id = Date.now().toString();
+                contact.timestamp = new Date().toISOString();
+                contacts.unshift(contact);
+                localStorage.setItem(`${this.dbName}_contacts`, JSON.stringify(contacts));
+            }
+
+            // Get contacts from local storage
+            getContacts() {
+                const contacts = localStorage.getItem(`${this.dbName}_contacts`);
+                return contacts ? JSON.parse(contacts) : [];
+            }
+
+            // Track visitor
+            trackVisitor() {
+                const today = new Date().toISOString().split('T')[0];
+                const visitorId = localStorage.getItem('visitorId') || this.generateVisitorId();
+                localStorage.setItem('visitorId', visitorId);
+
+                const visitors = this.getVisitors();
+                visitors.push({
+                    visitorId: visitorId,
+                    date: today,
+                    timestamp: new Date().toISOString(),
+                    userAgent: navigator.userAgent
+                });
+                localStorage.setItem(`${this.dbName}_visitors`, JSON.stringify(visitors));
+            }
+
+            getVisitors() {
+                const visitors = localStorage.getItem(`${this.dbName}_visitors`);
+                return visitors ? JSON.parse(visitors) : [];
+            }
+
+            generateVisitorId() {
+                return 'visitor_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+            }
+
+            // Get storage info
+            getStorageInfo() {
+                let totalSize = 0;
+                for (let key in localStorage) {
+                    if (localStorage.hasOwnProperty(key)) {
+                        totalSize += localStorage[key].length + key.length;
+                    }
+                }
+                return {
+                    used: (totalSize / 1024).toFixed(2) + ' KB',
+                    blogs: this.getBlogs().length,
+                    contacts: this.getContacts().length,
+                    visitors: this.getVisitors().length
+                };
+            }
         }
 
+        const localDB = new LocalDatabase();
+
+        // Initialize with sample data if empty
+        if (localDB.getBlogs().length === 0) {
+            localDB.addBlog({
+                title: "Welcome to My Blog!",
+                content: "This is the beginning of something awesome. Stay tuned for amazing content coming your way! All data is stored locally on your device.",
+                tag: "Welcome"
+            });
+        }
+
+        // Track visitor
+        localDB.trackVisitor();
+
+        // Load blogs from local storage
+        function loadBlogs() {
+            const blogs = localDB.getBlogs();
+            const blogContainer = document.getElementById('blogContainer');
+            blogContainer.innerHTML = '';
+            
+            if (blogs.length === 0) {
+                blogContainer.innerHTML = `
+                    <div class="blog-card">
+                        <div class="blog-image">🚀</div>
+                        <div class="blog-content">
+                            <div class="blog-meta">
+                                <span class="blog-date">Coming Soon</span>
+                                <span class="blog-tag">Exciting</span>
+                            </div>
+                            <h3>More Content Coming Soon!</h3>
+                            <p>I'm working on some amazing content for you. Stay tuned! 🎉</p>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+            
+            const emojis = ['📝', '💡', '🚀', '✨', '🎯', '💻', '🎨', '🔥'];
+            
+            blogs.forEach((blog, index) => {
+                const blogCard = document.createElement('div');
+                blogCard.className = 'blog-card';
+                const dateStr = blog.date ? new Date(blog.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) : 'No date';
+                const emoji = emojis[index % emojis.length];
+                
+                blogCard.innerHTML = `
+                    <div class="blog-image">${emoji}</div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="blog-date">${dateStr}</span>
+                            <span class="blog-tag">${blog.tag || 'New'}</span>
+                        </div>
+                        <h3>${blog.title}</h3>
+                        <p>${blog.content.substring(0, 120)}...</p>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                `;
+                blogContainer.appendChild(blogCard);
+            });
+
+            document.getElementById('articlesCount').textContent = blogs.length;
+        }
+
+        // Load blogs on page load
+        loadBlogs();
+
+        // Contact form submission
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            localDB.saveContact({ name, email, message });
+            
+            showStatus('Message saved locally! 🎉 (Stored on your device)', 'success');
+            document.getElementById('contactForm').reset();
+
+            console.log('Storage Info:', localDB.getStorageInfo());
+        });
+
+        function showStatus(message, type) {
+            const statusDiv = document.getElementById('statusMessage');
+            statusDiv.textContent = message;
+            statusDiv.className = `status-message ${type}`;
+            statusDiv.style.display = 'block';
+            setTimeout(() => {
+                statusDiv.style.display = 'none';
+            }, 5000);
+        }
+
+        // Drawer functionality
         const hamburger = document.getElementById('hamburger');
         const drawer = document.getElementById('drawer');
         const overlay = document.getElementById('overlay');
@@ -1025,117 +1085,7 @@
             });
         });
 
-        async function trackVisitor() {
-            if (!db) return;
-            try {
-                const today = new Date().toISOString().split('T')[0];
-                const visitorId = localStorage.getItem('visitorId') || generateVisitorId();
-                localStorage.setItem('visitorId', visitorId);
-                await addDoc(collection(db, "visitors"), {
-                    visitorId: visitorId,
-                    date: today,
-                    timestamp: new Date().toISOString(),
-                    userAgent: navigator.userAgent
-                });
-            } catch (error) {
-                console.log("Error tracking visitor:", error);
-            }
-        }
-
-        function generateVisitorId() {
-            return 'visitor_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-        }
-
-        async function loadBlogs() {
-            if (!db) return;
-            try {
-                const blogsQuery = query(collection(db, "blogs"), orderBy("date", "desc"));
-                const querySnapshot = await getDocs(blogsQuery);
-                const blogContainer = document.getElementById('blogContainer');
-                blogContainer.innerHTML = '';
-                
-                if (querySnapshot.empty) {
-                    blogContainer.innerHTML = `
-                        <div class="blog-card">
-                            <div class="blog-image">🚀</div>
-                            <div class="blog-content">
-                                <div class="blog-meta">
-                                    <span class="blog-date">Coming Soon</span>
-                                    <span class="blog-tag">Exciting</span>
-                                </div>
-                                <h3>More Content Coming Soon!</h3>
-                                <p>I'm working on some amazing content for you. Stay tuned! 🎉</p>
-                            </div>
-                        </div>
-                    `;
-                    return;
-                }
-                
-                const emojis = ['📝', '💡', '🚀', '✨', '🎯', '💻', '🎨', '🔥'];
-                let emojiIndex = 0;
-
-                querySnapshot.forEach((docSnap) => {
-                    const blog = docSnap.data();
-                    const blogCard = document.createElement('div');
-                    blogCard.className = 'blog-card';
-                    const dateStr = blog.date ? new Date(blog.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) : 'No date';
-                    const emoji = emojis[emojiIndex % emojis.length];
-                    emojiIndex++;
-                    
-                    blogCard.innerHTML = `
-                        <div class="blog-image">${emoji}</div>
-                        <div class="blog-content">
-                            <div class="blog-meta">
-                                <span class="blog-date">${dateStr}</span>
-                                <span class="blog-tag">New</span>
-                            </div>
-                            <h3>${blog.title}</h3>
-                            <p>${blog.content.substring(0, 120)}...</p>
-                            <a href="#" class="read-more">Read More →</a>
-                        </div>
-                    `;
-                    blogContainer.appendChild(blogCard);
-                });
-
-                document.getElementById('articlesCount').textContent = querySnapshot.size;
-            } catch (error) {
-                console.log("Error loading blogs:", error);
-            }
-        }
-
-        document.getElementById('contactForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            if (!isFirebaseConfigured) {
-                showStatus('Please configure Firebase first!', 'error');
-                return;
-            }
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
-            try {
-                await addDoc(collection(db, "contacts"), {
-                    name: name,
-                    email: email,
-                    message: message,
-                    timestamp: new Date().toISOString()
-                });
-                showStatus('Message sent! I\'ll get back to you soon! 🎉', 'success');
-                document.getElementById('contactForm').reset();
-            } catch (error) {
-                showStatus('Oops! Something went wrong. Try again! 😅', 'error');
-            }
-        });
-
-        function showStatus(message, type) {
-            const statusDiv = document.getElementById('statusMessage');
-            statusDiv.textContent = message;
-            statusDiv.className = `status-message ${type}`;
-            statusDiv.style.display = 'block';
-            setTimeout(() => {
-                statusDiv.style.display = 'none';
-            }, 5000);
-        }
-
+        // Smooth scrolling
         document.querySelectorAll('nav a, .btn-primary, .btn-secondary, .drawer-link').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 if (this.getAttribute('href').startsWith('#')) {
@@ -1147,6 +1097,10 @@
                 }
             });
         });
+
+        // Log storage info to console
+        console.log('📦 Local Storage Database Active!');
+        console.log('Storage Info:', localDB.getStorageInfo());
     </script>
 </body>
 </html>
