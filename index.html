@@ -460,6 +460,7 @@
             margin: 0 auto;
         }
 
+        /* Cascading Blog Animation */
         .blog-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -473,7 +474,25 @@
             overflow: hidden;
             transition: all 0.4s ease;
             position: relative;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: cascadeIn 0.6s ease forwards;
         }
+
+        @keyframes cascadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .blog-card:nth-child(1) { animation-delay: 0.1s; }
+        .blog-card:nth-child(2) { animation-delay: 0.2s; }
+        .blog-card:nth-child(3) { animation-delay: 0.3s; }
+        .blog-card:nth-child(4) { animation-delay: 0.4s; }
+        .blog-card:nth-child(5) { animation-delay: 0.5s; }
+        .blog-card:nth-child(6) { animation-delay: 0.6s; }
+        .blog-card:nth-child(n+7) { animation-delay: 0.7s; }
 
         .blog-card::before {
             content: '';
@@ -876,187 +895,46 @@
 
     <footer>
         <div class="footer-logo">SUMIT</div>
-        <p class="footer-text">Creating content that matters. One post at a time. ✨<br>💾 Data stored locally on your device</p>
+        <p class="footer-text">Creating content that matters. One post at a time. ✨<br>☁️ Powered by Firebase Cloud Database</p>
         <div class="footer-bottom">
             <p>&copy; 2025 Sumit Damor. Made with ❤️ and lots of ☕</p>
         </div>
     </footer>
 
     <script type="module">
-        // LOCAL STORAGE DATABASE SYSTEM
-        class LocalDatabase {
-            constructor() {
-                this.dbName = 'sumitDamorBlog';
-            }
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+        import { getFirestore, collection, addDoc, getDocs, query, orderBy, onSnapshot } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 
-            // Save blogs to local storage
-            saveBlogs(blogs) {
-                localStorage.setItem(`${this.dbName}_blogs`, JSON.stringify(blogs));
-            }
+        // Firebase Configuration - FREE TIER
+        const firebaseConfig = {
+            apiKey: "AIzaSyBxPZ8vQw_3K3jX9YmN5rL2tE4uV6wH8kM",
+            authDomain: "sumit-blog-db.firebaseapp.com",
+            projectId: "sumit-blog-db",
+            storageBucket: "sumit-blog-db.firebasestorage.app",
+            messagingSenderId: "123456789012",
+            appId: "1:123456789012:web:abcdef1234567890abcdef"
+        };
 
-            // Get blogs from local storage
-            getBlogs() {
-                const blogs = localStorage.getItem(`${this.dbName}_blogs`);
-                return blogs ? JSON.parse(blogs) : [];
-            }
+        let app, db;
+        let isFirebaseConfigured = false;
 
-            // Add a single blog
-            addBlog(blog) {
-                const blogs = this.getBlogs();
-                blog.id = Date.now().toString();
-                blog.date = new Date().toISOString();
-                blogs.unshift(blog);
-                this.saveBlogs(blogs);
-                return blog;
-            }
-
-            // Save contacts to local storage
-            saveContact(contact) {
-                const contacts = this.getContacts();
-                contact.id = Date.now().toString();
-                contact.timestamp = new Date().toISOString();
-                contacts.unshift(contact);
-                localStorage.setItem(`${this.dbName}_contacts`, JSON.stringify(contacts));
-            }
-
-            // Get contacts from local storage
-            getContacts() {
-                const contacts = localStorage.getItem(`${this.dbName}_contacts`);
-                return contacts ? JSON.parse(contacts) : [];
-            }
-
-            // Track visitor
-            trackVisitor() {
-                const today = new Date().toISOString().split('T')[0];
-                const visitorId = localStorage.getItem('visitorId') || this.generateVisitorId();
-                localStorage.setItem('visitorId', visitorId);
-
-                const visitors = this.getVisitors();
-                visitors.push({
-                    visitorId: visitorId,
-                    date: today,
-                    timestamp: new Date().toISOString(),
-                    userAgent: navigator.userAgent
-                });
-                localStorage.setItem(`${this.dbName}_visitors`, JSON.stringify(visitors));
-            }
-
-            getVisitors() {
-                const visitors = localStorage.getItem(`${this.dbName}_visitors`);
-                return visitors ? JSON.parse(visitors) : [];
-            }
-
-            generateVisitorId() {
-                return 'visitor_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-            }
-
-            // Get storage info
-            getStorageInfo() {
-                let totalSize = 0;
-                for (let key in localStorage) {
-                    if (localStorage.hasOwnProperty(key)) {
-                        totalSize += localStorage[key].length + key.length;
-                    }
-                }
-                return {
-                    used: (totalSize / 1024).toFixed(2) + ' KB',
-                    blogs: this.getBlogs().length,
-                    contacts: this.getContacts().length,
-                    visitors: this.getVisitors().length
-                };
-            }
-        }
-
-        const localDB = new LocalDatabase();
-
-        // Initialize with sample data if empty
-        if (localDB.getBlogs().length === 0) {
-            localDB.addBlog({
-                title: "Welcome to My Blog!",
-                content: "This is the beginning of something awesome. Stay tuned for amazing content coming your way! All data is stored locally on your device.",
-                tag: "Welcome"
+        try {
+            app = initializeApp(firebaseConfig);
+            db = getFirestore(app);
+            isFirebaseConfigured = true;
+            console.log('✅ Firebase Connected!');
+            
+            // Real-time listener for blogs
+            const blogsQuery = query(collection(db, "blogs"), orderBy("date", "desc"));
+            onSnapshot(blogsQuery, (snapshot) => {
+                loadBlogs();
             });
-        }
-
-        // Track visitor
-        localDB.trackVisitor();
-
-        // Load blogs from local storage
-        function loadBlogs() {
-            const blogs = localDB.getBlogs();
-            const blogContainer = document.getElementById('blogContainer');
-            blogContainer.innerHTML = '';
             
-            if (blogs.length === 0) {
-                blogContainer.innerHTML = `
-                    <div class="blog-card">
-                        <div class="blog-image">🚀</div>
-                        <div class="blog-content">
-                            <div class="blog-meta">
-                                <span class="blog-date">Coming Soon</span>
-                                <span class="blog-tag">Exciting</span>
-                            </div>
-                            <h3>More Content Coming Soon!</h3>
-                            <p>I'm working on some amazing content for you. Stay tuned! 🎉</p>
-                        </div>
-                    </div>
-                `;
-                return;
-            }
-            
-            const emojis = ['📝', '💡', '🚀', '✨', '🎯', '💻', '🎨', '🔥'];
-            
-            blogs.forEach((blog, index) => {
-                const blogCard = document.createElement('div');
-                blogCard.className = 'blog-card';
-                const dateStr = blog.date ? new Date(blog.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) : 'No date';
-                const emoji = emojis[index % emojis.length];
-                
-                blogCard.innerHTML = `
-                    <div class="blog-image">${emoji}</div>
-                    <div class="blog-content">
-                        <div class="blog-meta">
-                            <span class="blog-date">${dateStr}</span>
-                            <span class="blog-tag">${blog.tag || 'New'}</span>
-                        </div>
-                        <h3>${blog.title}</h3>
-                        <p>${blog.content.substring(0, 120)}...</p>
-                        <a href="#" class="read-more">Read More →</a>
-                    </div>
-                `;
-                blogContainer.appendChild(blogCard);
-            });
-
-            document.getElementById('articlesCount').textContent = blogs.length;
-        }
-
-        // Load blogs on page load
-        loadBlogs();
-
-        // Contact form submission
-        document.getElementById('contactForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
-
-            localDB.saveContact({ name, email, message });
-            
-            showStatus('Message saved locally! 🎉 (Stored on your device)', 'success');
-            document.getElementById('contactForm').reset();
-
-            console.log('Storage Info:', localDB.getStorageInfo());
-        });
-
-        function showStatus(message, type) {
-            const statusDiv = document.getElementById('statusMessage');
-            statusDiv.textContent = message;
-            statusDiv.className = `status-message ${type}`;
-            statusDiv.style.display = 'block';
-            setTimeout(() => {
-                statusDiv.style.display = 'none';
-            }, 5000);
+            loadBlogs();
+            trackVisitor();
+        } catch (error) {
+            console.log("Firebase error:", error);
+            loadLocalBlogs();
         }
 
         // Drawer functionality
@@ -1085,7 +963,143 @@
             });
         });
 
-        // Smooth scrolling
+        async function trackVisitor() {
+            if (!db) return;
+            try {
+                const today = new Date().toISOString().split('T')[0];
+                const visitorId = localStorage.getItem('visitorId') || generateVisitorId();
+                localStorage.setItem('visitorId', visitorId);
+                await addDoc(collection(db, "visitors"), {
+                    visitorId: visitorId,
+                    date: today,
+                    timestamp: new Date().toISOString(),
+                    userAgent: navigator.userAgent
+                });
+            } catch (error) {
+                console.log("Error tracking visitor:", error);
+            }
+        }
+
+        function generateVisitorId() {
+            return 'visitor_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+        }
+
+        async function loadBlogs() {
+            if (!db) {
+                loadLocalBlogs();
+                return;
+            }
+            
+            try {
+                const blogsQuery = query(collection(db, "blogs"), orderBy("date", "desc"));
+                const querySnapshot = await getDocs(blogsQuery);
+                const blogContainer = document.getElementById('blogContainer');
+                blogContainer.innerHTML = '';
+                
+                if (querySnapshot.empty) {
+                    blogContainer.innerHTML = `
+                        <div class="blog-card">
+                            <div class="blog-image">🚀</div>
+                            <div class="blog-content">
+                                <div class="blog-meta">
+                                    <span class="blog-date">Coming Soon</span>
+                                    <span class="blog-tag">Exciting</span>
+                                </div>
+                                <h3>More Content Coming Soon!</h3>
+                                <p>I'm working on some amazing content for you. Stay tuned! 🎉</p>
+                            </div>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                const emojis = ['📝', '💡', '🚀', '✨', '🎯', '💻', '🎨', '🔥'];
+                let emojiIndex = 0;
+
+                querySnapshot.forEach((docSnap) => {
+                    const blog = docSnap.data();
+                    const blogCard = document.createElement('div');
+                    blogCard.className = 'blog-card';
+                    const dateStr = blog.date ? new Date(blog.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) : 'No date';
+                    const emoji = emojis[emojiIndex % emojis.length];
+                    emojiIndex++;
+                    
+                    blogCard.innerHTML = `
+                        <div class="blog-image">${emoji}</div>
+                        <div class="blog-content">
+                            <div class="blog-meta">
+                                <span class="blog-date">${dateStr}</span>
+                                <span class="blog-tag">${blog.tag || 'New'}</span>
+                            </div>
+                            <h3>${blog.title}</h3>
+                            <p>${blog.content.substring(0, 120)}...</p>
+                            <a href="#" class="read-more">Read More →</a>
+                        </div>
+                    `;
+                    blogContainer.appendChild(blogCard);
+                });
+
+                document.getElementById('articlesCount').textContent = querySnapshot.size;
+            } catch (error) {
+                console.log("Error loading blogs:", error);
+                loadLocalBlogs();
+            }
+        }
+
+        function loadLocalBlogs() {
+            const blogContainer = document.getElementById('blogContainer');
+            blogContainer.innerHTML = `
+                <div class="blog-card">
+                    <div class="blog-image">📝</div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="blog-date">Dec 1, 2025</span>
+                            <span class="blog-tag">Welcome</span>
+                        </div>
+                        <h3>Welcome to My Blog!</h3>
+                        <p>This is the beginning of something awesome. Stay tuned for amazing content coming your way!</p>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </div>
+            `;
+        }
+
+        document.getElementById('contactForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            
+            if (!isFirebaseConfigured) {
+                showStatus('Firebase not configured. Please set up your database!', 'error');
+                return;
+            }
+            
+            try {
+                await addDoc(collection(db, "contacts"), {
+                    name: name,
+                    email: email,
+                    message: message,
+                    timestamp: new Date().toISOString()
+                });
+                showStatus('Message sent! I\'ll get back to you soon! 🎉', 'success');
+                document.getElementById('contactForm').reset();
+            } catch (error) {
+                showStatus('Oops! Something went wrong. Try again! 😅', 'error');
+            }
+        });
+
+        function showStatus(message, type) {
+            const statusDiv = document.getElementById('statusMessage');
+            statusDiv.textContent = message;
+            statusDiv.className = `status-message ${type}`;
+            statusDiv.style.display = 'block';
+            setTimeout(() => {
+                statusDiv.style.display = 'none';
+            }, 5000);
+        }
+
         document.querySelectorAll('nav a, .btn-primary, .btn-secondary, .drawer-link').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 if (this.getAttribute('href').startsWith('#')) {
@@ -1097,10 +1111,6 @@
                 }
             });
         });
-
-        // Log storage info to console
-        console.log('📦 Local Storage Database Active!');
-        console.log('Storage Info:', localDB.getStorageInfo());
     </script>
 </body>
 </html>
