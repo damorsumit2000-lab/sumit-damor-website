@@ -475,14 +475,14 @@
             transition: all 0.4s ease;
             position: relative;
             opacity: 0;
-            transform: translateY(50px);
+            transform: translateY(50px) scale(0.95);
             animation: cascadeIn 0.6s ease forwards;
         }
 
         @keyframes cascadeIn {
             to {
                 opacity: 1;
-                transform: translateY(0);
+                transform: translateY(0) scale(1);
             }
         }
 
@@ -492,7 +492,10 @@
         .blog-card:nth-child(4) { animation-delay: 0.4s; }
         .blog-card:nth-child(5) { animation-delay: 0.5s; }
         .blog-card:nth-child(6) { animation-delay: 0.6s; }
-        .blog-card:nth-child(n+7) { animation-delay: 0.7s; }
+        .blog-card:nth-child(7) { animation-delay: 0.7s; }
+        .blog-card:nth-child(8) { animation-delay: 0.8s; }
+        .blog-card:nth-child(9) { animation-delay: 0.9s; }
+        .blog-card:nth-child(n+10) { animation-delay: 1s; }
 
         .blog-card::before {
             content: '';
@@ -507,9 +510,9 @@
         }
 
         .blog-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-10px) scale(1.02);
             border-color: var(--accent-purple);
-            box-shadow: 0 20px 60px rgba(167, 139, 250, 0.2);
+            box-shadow: 0 20px 60px rgba(167, 139, 250, 0.3);
         }
 
         .blog-card:hover::before {
@@ -905,14 +908,15 @@
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
         import { getFirestore, collection, addDoc, getDocs, query, orderBy, onSnapshot } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 
-        // Firebase Configuration - FREE TIER
+        // YOUR REAL Firebase Configuration
         const firebaseConfig = {
-            apiKey: "AIzaSyBxPZ8vQw_3K3jX9YmN5rL2tE4uV6wH8kM",
+            apiKey: "AIzaSyDNb2TwqbzyqKJHGiGxMqlg4M2hZVAcSE0",
             authDomain: "sumit-blog-db.firebaseapp.com",
             projectId: "sumit-blog-db",
             storageBucket: "sumit-blog-db.firebasestorage.app",
-            messagingSenderId: "123456789012",
-            appId: "1:123456789012:web:abcdef1234567890abcdef"
+            messagingSenderId: "931102199228",
+            appId: "1:931102199228:web:d16ba2bf4a9e7253966fb9",
+            measurementId: "G-53FHRZV15V"
         };
 
         let app, db;
@@ -922,9 +926,9 @@
             app = initializeApp(firebaseConfig);
             db = getFirestore(app);
             isFirebaseConfigured = true;
-            console.log('✅ Firebase Connected!');
+            console.log('✅ Firebase Connected Successfully!');
             
-            // Real-time listener for blogs
+            // Real-time listener for blogs with cascading animation
             const blogsQuery = query(collection(db, "blogs"), orderBy("date", "desc"));
             onSnapshot(blogsQuery, (snapshot) => {
                 loadBlogs();
@@ -933,7 +937,7 @@
             loadBlogs();
             trackVisitor();
         } catch (error) {
-            console.log("Firebase error:", error);
+            console.error("Firebase error:", error);
             loadLocalBlogs();
         }
 
@@ -1013,7 +1017,7 @@
                     return;
                 }
                 
-                const emojis = ['📝', '💡', '🚀', '✨', '🎯', '💻', '🎨', '🔥'];
+                const emojis = ['📝', '💡', '🚀', '✨', '🎯', '💻', '🎨', '🔥', '⚡', '🌟'];
                 let emojiIndex = 0;
 
                 querySnapshot.forEach((docSnap) => {
@@ -1041,7 +1045,7 @@
 
                 document.getElementById('articlesCount').textContent = querySnapshot.size;
             } catch (error) {
-                console.log("Error loading blogs:", error);
+                console.error("Error loading blogs:", error);
                 loadLocalBlogs();
             }
         }
@@ -1053,7 +1057,7 @@
                     <div class="blog-image">📝</div>
                     <div class="blog-content">
                         <div class="blog-meta">
-                            <span class="blog-date">Dec 1, 2025</span>
+                            <span class="blog-date">Dec 4, 2025</span>
                             <span class="blog-tag">Welcome</span>
                         </div>
                         <h3>Welcome to My Blog!</h3>
@@ -1086,6 +1090,7 @@
                 showStatus('Message sent! I\'ll get back to you soon! 🎉', 'success');
                 document.getElementById('contactForm').reset();
             } catch (error) {
+                console.error("Contact form error:", error);
                 showStatus('Oops! Something went wrong. Try again! 😅', 'error');
             }
         });
