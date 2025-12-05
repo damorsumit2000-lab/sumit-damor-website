@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +12,7 @@
             box-sizing: border-box;
         }
 
-        :root {
+        :root[data-theme="dark"] {
             --bg-dark: #0f0f0f;
             --bg-card: #1a1a1a;
             --accent-purple: #a78bfa;
@@ -24,15 +24,28 @@
             --border: #27272a;
         }
 
+        :root[data-theme="light"] {
+            --bg-dark: #ffffff;
+            --bg-card: #f9fafb;
+            --accent-purple: #7c3aed;
+            --accent-pink: #ec4899;
+            --accent-cyan: #06b6d4;
+            --accent-green: #22c55e;
+            --text-primary: #0f0f0f;
+            --text-secondary: #52525b;
+            --border: #e4e4e7;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             background: var(--bg-dark);
             color: var(--text-primary);
             line-height: 1.6;
             overflow-x: hidden;
+            transition: background 0.3s ease, color 0.3s ease;
         }
 
-        /* Animated Background */
+        /* Enhanced Animated Background */
         .bg-gradient {
             position: fixed;
             top: 0;
@@ -59,6 +72,19 @@
             animation: float 20s ease-in-out infinite;
         }
 
+        .bg-gradient::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 10% 80%, rgba(34, 211, 238, 0.15), transparent 40%),
+                radial-gradient(circle at 90% 20%, rgba(74, 222, 128, 0.1), transparent 40%);
+            animation: pulse 25s ease-in-out infinite;
+        }
+
         @keyframes gradientShift {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.8; }
@@ -70,6 +96,11 @@
             66% { transform: translate(-20px, 20px) scale(0.9); }
         }
 
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+
         nav {
             background: rgba(15, 15, 15, 0.8);
             backdrop-filter: blur(20px);
@@ -79,6 +110,11 @@
             top: 0;
             z-index: 1000;
             border-bottom: 1px solid var(--border);
+            transition: background 0.3s ease;
+        }
+
+        [data-theme="light"] nav {
+            background: rgba(255, 255, 255, 0.8);
         }
 
         .nav-container {
@@ -175,7 +211,7 @@
             left: -400px;
             width: 400px;
             height: 100vh;
-            background: linear-gradient(180deg, #1a1a1a 0%, #0f0f0f 100%);
+            background: linear-gradient(180deg, var(--bg-card) 0%, var(--bg-dark) 100%);
             border-right: 1px solid var(--border);
             transition: left 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
             z-index: 999;
@@ -228,7 +264,7 @@
             margin-bottom: 0.8rem;
         }
 
-        .drawer-menu a {
+        .drawer-menu a, .drawer-menu .theme-toggle-btn {
             display: flex;
             align-items: center;
             gap: 1.2rem;
@@ -241,9 +277,14 @@
             border-radius: 16px;
             position: relative;
             overflow: hidden;
+            background: transparent;
+            border: none;
+            width: 100%;
+            cursor: pointer;
+            text-align: left;
         }
 
-        .drawer-menu a::before {
+        .drawer-menu a::before, .drawer-menu .theme-toggle-btn::before {
             content: '';
             position: absolute;
             left: 0;
@@ -255,13 +296,13 @@
             transition: transform 0.3s ease;
         }
 
-        .drawer-menu a:hover {
+        .drawer-menu a:hover, .drawer-menu .theme-toggle-btn:hover {
             color: var(--text-primary);
             background: rgba(167, 139, 250, 0.1);
             transform: translateX(8px);
         }
 
-        .drawer-menu a:hover::before {
+        .drawer-menu a:hover::before, .drawer-menu .theme-toggle-btn:hover::before {
             transform: scaleY(1);
         }
 
@@ -277,7 +318,7 @@
             transition: all 0.3s ease;
         }
 
-        .drawer-menu a:hover .drawer-menu-icon {
+        .drawer-menu a:hover .drawer-menu-icon, .drawer-menu .theme-toggle-btn:hover .drawer-menu-icon {
             background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
             transform: scale(1.1);
         }
@@ -357,6 +398,7 @@
             display: none;
         }
 
+        /* Extended Landing Page */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -381,10 +423,10 @@
             font-size: 0.9rem;
             font-weight: 500;
             margin-bottom: 2rem;
-            animation: float 3s ease-in-out infinite;
+            animation: floatBadge 3s ease-in-out infinite;
         }
 
-        @keyframes float {
+        @keyframes floatBadge {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
         }
@@ -446,6 +488,131 @@
         .btn-secondary:hover {
             border-color: var(--accent-purple);
             background: rgba(167, 139, 250, 0.1);
+        }
+
+        /* New Landing Page Segments */
+        .features-section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-pink));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-purple);
+            box-shadow: 0 20px 60px rgba(167, 139, 250, 0.2);
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .testimonials-section {
+            padding: 6rem 2rem;
+            background: var(--bg-card);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 3rem auto 0;
+        }
+
+        .testimonial-card {
+            background: var(--bg-dark);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-purple);
+        }
+
+        .testimonial-text {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .author-info h4 {
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+
+        .author-info p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
         }
 
         section {
@@ -587,6 +754,13 @@
             align-items: center;
             justify-content: center;
             font-size: 3rem;
+            overflow: hidden;
+        }
+
+        .blog-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .blog-content {
@@ -682,16 +856,162 @@
             gap: 2rem;
             color: var(--text-secondary);
             margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .blog-detail-image {
+            width: 100%;
+            max-height: 500px;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 3rem;
+        }
+
+        .blog-detail-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .blog-detail-content {
             font-size: 1.2rem;
             line-height: 1.8;
             color: var(--text-secondary);
+            margin-bottom: 3rem;
         }
 
         .blog-detail-content p {
             margin-bottom: 1.5rem;
+        }
+
+        /* Blog Interactions */
+        .blog-interactions {
+            display: flex;
+            gap: 1.5rem;
+            padding: 2rem 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .interaction-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .interaction-btn:hover {
+            border-color: var(--accent-purple);
+            color: var(--accent-purple);
+            transform: translateY(-2px);
+        }
+
+        .interaction-btn.liked {
+            background: rgba(167, 139, 250, 0.1);
+            border-color: var(--accent-purple);
+            color: var(--accent-purple);
+        }
+
+        .interaction-btn .icon {
+            font-size: 1.2rem;
+        }
+
+        /* Comments Section */
+        .comments-section {
+            margin-top: 3rem;
+        }
+
+        .comments-header {
+            font-family: 'Syne', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .comment-form {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .comment-input {
+            width: 100%;
+            padding: 1rem;
+            background: var(--bg-dark);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            resize: vertical;
+            min-height: 100px;
+            margin-bottom: 1rem;
+        }
+
+        .comment-input:focus {
+            outline: none;
+            border-color: var(--accent-purple);
+        }
+
+        .comment-submit {
+            padding: 0.8rem 2rem;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .comment-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(167, 139, 250, 0.4);
+        }
+
+        .comments-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .comment-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+        }
+
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .comment-author {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .comment-date {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .comment-text {
+            color: var(--text-secondary);
+            line-height: 1.6;
         }
 
         .about-grid {
@@ -856,10 +1176,13 @@
             border: 1px solid rgba(244, 114, 182, 0.3);
         }
 
+        /* Responsive Design */
         @media (max-width: 1024px) {
             .desktop-menu { display: none; }
             .hero h1 { font-size: 3.5rem; }
             .about-grid { grid-template-columns: 1fr; }
+            .features-grid { grid-template-columns: 1fr; }
+            .testimonials-grid { grid-template-columns: 1fr; }
         }
 
         @media (max-width: 768px) {
@@ -868,12 +1191,21 @@
             .drawer-title { font-size: 1.8rem; }
             .drawer-menu { padding: 1.5rem 1rem; }
             .hero h1 { font-size: 2.5rem; }
+            .hero-description { font-size: 1.1rem; }
             .section-title { font-size: 2rem; }
             .stats-grid { grid-template-columns: 1fr; }
             .contact-container { padding: 2rem; }
             .cta-buttons { flex-direction: column; }
             .blog-card { min-width: 280px; max-width: 280px; }
+            .blog-card h3 { font-size: 1.2rem; }
+            .blog-card p { font-size: 0.9rem; }
             .blog-detail-header h1 { font-size: 2rem; }
+            .blog-detail-content { font-size: 1rem; }
+            .tag-header { font-size: 1.5rem; }
+            .feature-card { padding: 2rem; }
+            .testimonial-card { padding: 2rem; }
+            .blog-interactions { gap: 1rem; }
+            .interaction-btn { padding: 0.6rem 1rem; font-size: 0.9rem; }
         }
 
         @media (min-width: 1025px) {
@@ -914,6 +1246,7 @@
                 <li><a href="#" class="drawer-link" data-section="about"><span class="drawer-menu-icon">👋</span><span>About Me</span></a></li>
                 <li><a href="#" class="drawer-link" data-section="blog"><span class="drawer-menu-icon">📝</span><span>Blog Posts</span></a></li>
                 <li><a href="#" class="drawer-link" data-section="contact"><span class="drawer-menu-icon">💬</span><span>Contact</span></a></li>
+                <li><button class="theme-toggle-btn" id="themeToggle"><span class="drawer-menu-icon" id="themeIcon">🌙</span><span id="themeText">Dark Mode</span></button></li>
             </ul>
             <div class="drawer-footer">
                 <div class="drawer-footer-title">Connect With Me</div>
@@ -942,6 +1275,73 @@
             </div>
         </div>
     </section>
+
+    <!-- Features Section -->
+    <div class="features-section page-section" id="home-section-features">
+        <div class="section-header">
+            <div class="section-badge">What I Offer</div>
+            <h2 class="section-title">Why Read My Blog?</h2>
+            <p class="section-description">Discover what makes this space special</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">💡</div>
+                <h3>Fresh Insights</h3>
+                <p>Get unique perspectives on tech, design, and creativity that you won't find anywhere else.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🚀</div>
+                <h3>Practical Tips</h3>
+                <p>Learn actionable strategies and techniques you can apply immediately to your projects.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3>Real Stories</h3>
+                <p>Read authentic experiences and lessons learned from real-world challenges and successes.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Testimonials Section -->
+    <div class="testimonials-section page-section" id="home-section-testimonials">
+        <div class="section-header">
+            <div class="section-badge">Testimonials</div>
+            <h2 class="section-title">What Readers Say</h2>
+            <p class="section-description">Hear from the amazing community</p>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <p class="testimonial-text">"Sumit's blog has been a game-changer for my understanding of modern web development. The insights are always on point!"</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">👨‍💻</div>
+                    <div class="author-info">
+                        <h4>Alex Johnson</h4>
+                        <p>Software Developer</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-text">"I love how Sumit breaks down complex topics into digestible content. It's my go-to resource for learning new things!"</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">👩‍🎨</div>
+                    <div class="author-info">
+                        <h4>Sarah Chen</h4>
+                        <p>UI/UX Designer</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-text">"The practical examples and real-world applications make every article worth reading. Highly recommended!"</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">👨‍🚀</div>
+                    <div class="author-info">
+                        <h4>Mike Rodriguez</h4>
+                        <p>Product Manager</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- About Section -->
     <section id="about-section" class="page-section hidden">
@@ -998,7 +1398,32 @@
                     <span id="detailDate"></span>
                 </div>
             </div>
+            <div class="blog-detail-image" id="detailImageContainer" style="display: none;">
+                <img id="detailImage" src="" alt="">
+            </div>
             <div class="blog-detail-content" id="detailContent"></div>
+            
+            <!-- Blog Interactions -->
+            <div class="blog-interactions">
+                <button class="interaction-btn" id="likeBtn">
+                    <span class="icon">❤️</span>
+                    <span id="likeCount">0</span> Likes
+                </button>
+                <button class="interaction-btn" id="shareBtn">
+                    <span class="icon">🔗</span>
+                    Share
+                </button>
+            </div>
+
+            <!-- Comments Section -->
+            <div class="comments-section">
+                <h3 class="comments-header">Comments (<span id="commentCount">0</span>)</h3>
+                <div class="comment-form">
+                    <textarea class="comment-input" id="commentInput" placeholder="Share your thoughts..."></textarea>
+                    <button class="comment-submit" id="commentSubmit">Post Comment</button>
+                </div>
+                <div class="comments-list" id="commentsList"></div>
+            </div>
         </div>
     </section>
 
@@ -1039,7 +1464,7 @@
 
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
-        import { getFirestore, collection, addDoc, getDocs, query, orderBy, onSnapshot } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+        import { getFirestore, collection, addDoc, getDocs, getDoc, doc, query, orderBy, onSnapshot, updateDoc, increment, arrayUnion, Timestamp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 
         const firebaseConfig = {
             apiKey: "AIzaSyDNb2TwqbzyqKJHGiGxMqlg4M2hZVAcSE0",
@@ -1053,6 +1478,7 @@
 
         let app, db;
         let isFirebaseConfigured = false;
+        let currentBlogId = null;
 
         try {
             app = initializeApp(firebaseConfig);
@@ -1070,6 +1496,35 @@
         } catch (error) {
             console.error("Firebase error:", error);
             loadLocalBlogs();
+        }
+
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeText = document.getElementById('themeText');
+        const html = document.documentElement;
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        html.setAttribute('data-theme', savedTheme);
+        updateThemeUI(savedTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeUI(newTheme);
+        });
+
+        function updateThemeUI(theme) {
+            if (theme === 'dark') {
+                themeIcon.textContent = '🌙';
+                themeText.textContent = 'Dark Mode';
+            } else {
+                themeIcon.textContent = '☀️';
+                themeText.textContent = 'Light Mode';
+            }
         }
 
         // Navigation
@@ -1108,11 +1563,18 @@
                 section.classList.add('hidden');
             });
             
-            const targetSection = document.getElementById(`${sectionName}-section`);
-            if (targetSection) {
-                targetSection.classList.remove('hidden');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+            if (sectionName === 'home') {
+                document.getElementById('home-section').classList.remove('hidden');
+                document.getElementById('home-section-features').classList.remove('hidden');
+                document.getElementById('home-section-testimonials').classList.remove('hidden');
+            } else {
+                const targetSection = document.getElementById(`${sectionName}-section`);
+                if (targetSection) {
+                    targetSection.classList.remove('hidden');
+                }
             }
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         async function trackVisitor() {
@@ -1215,8 +1677,12 @@
                             ? blog.content.substring(0, 120) + '...' 
                             : blog.content;
                         
+                        const imageHTML = blog.imageUrl 
+                            ? `<img src="${blog.imageUrl}" alt="${blog.title}">`
+                            : emoji;
+                        
                         blogCard.innerHTML = `
-                            <div class="blog-image">${emoji}</div>
+                            <div class="blog-image">${imageHTML}</div>
                             <div class="blog-content">
                                 <div class="blog-meta">
                                     <span class="blog-date">${dateStr}</span>
@@ -1242,7 +1708,9 @@
             }
         }
 
-        function showBlogDetail(blog) {
+        async function showBlogDetail(blog) {
+            currentBlogId = blog.id;
+            
             document.getElementById('detailTag').textContent = blog.tag || 'Uncategorized';
             document.getElementById('detailTitle').textContent = blog.title;
             
@@ -1253,13 +1721,186 @@
             }) : 'No date';
             document.getElementById('detailDate').textContent = dateStr;
             
+            // Show image if available
+            const imageContainer = document.getElementById('detailImageContainer');
+            const imageElement = document.getElementById('detailImage');
+            if (blog.imageUrl) {
+                imageElement.src = blog.imageUrl;
+                imageContainer.style.display = 'block';
+            } else {
+                imageContainer.style.display = 'none';
+            }
+            
             const formattedContent = blog.content.split('\n').map(para => 
                 para.trim() ? `<p>${para}</p>` : ''
             ).join('');
             document.getElementById('detailContent').innerHTML = formattedContent;
             
+            // Load likes and comments
+            await loadBlogInteractions(blog.id);
+            
             showSection('blog-detail');
         }
+
+        async function loadBlogInteractions(blogId) {
+            if (!db) return;
+            
+            try {
+                const blogRef = doc(db, "blogs", blogId);
+                const blogSnap = await getDoc(blogRef);
+                
+                if (blogSnap.exists()) {
+                    const data = blogSnap.data();
+                    const likeCount = data.likes || 0;
+                    const comments = data.comments || [];
+                    
+                    document.getElementById('likeCount').textContent = likeCount;
+                    document.getElementById('commentCount').textContent = comments.length;
+                    
+                    // Check if user has liked
+                    const userId = getUserId();
+                    const likedBy = data.likedBy || [];
+                    const likeBtn = document.getElementById('likeBtn');
+                    if (likedBy.includes(userId)) {
+                        likeBtn.classList.add('liked');
+                    } else {
+                        likeBtn.classList.remove('liked');
+                    }
+                    
+                    // Render comments
+                    renderComments(comments);
+                }
+            } catch (error) {
+                console.error("Error loading interactions:", error);
+            }
+        }
+
+        function renderComments(comments) {
+            const commentsList = document.getElementById('commentsList');
+            commentsList.innerHTML = '';
+            
+            if (comments.length === 0) {
+                commentsList.innerHTML = '<p style="text-align: center; color: var(--text-secondary);">No comments yet. Be the first to comment!</p>';
+                return;
+            }
+            
+            comments.reverse().forEach(comment => {
+                const commentCard = document.createElement('div');
+                commentCard.className = 'comment-card';
+                
+                const date = comment.timestamp ? new Date(comment.timestamp.seconds * 1000).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric'
+                }) : 'Just now';
+                
+                commentCard.innerHTML = `
+                    <div class="comment-header">
+                        <span class="comment-author">${comment.author || 'Anonymous'}</span>
+                        <span class="comment-date">${date}</span>
+                    </div>
+                    <p class="comment-text">${comment.text}</p>
+                `;
+                
+                commentsList.appendChild(commentCard);
+            });
+        }
+
+        function getUserId() {
+            let userId = localStorage.getItem('userId');
+            if (!userId) {
+                userId = 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+                localStorage.setItem('userId', userId);
+            }
+            return userId;
+        }
+
+        // Like button
+        document.getElementById('likeBtn').addEventListener('click', async () => {
+            if (!db || !currentBlogId) return;
+            
+            try {
+                const blogRef = doc(db, "blogs", currentBlogId);
+                const userId = getUserId();
+                const blogSnap = await getDoc(blogRef);
+                
+                if (blogSnap.exists()) {
+                    const data = blogSnap.data();
+                    const likedBy = data.likedBy || [];
+                    
+                    if (likedBy.includes(userId)) {
+                        // Unlike
+                        await updateDoc(blogRef, {
+                            likes: increment(-1),
+                            likedBy: likedBy.filter(id => id !== userId)
+                        });
+                    } else {
+                        // Like
+                        await updateDoc(blogRef, {
+                            likes: increment(1),
+                            likedBy: arrayUnion(userId)
+                        });
+                    }
+                    
+                    await loadBlogInteractions(currentBlogId);
+                }
+            } catch (error) {
+                console.error("Error liking blog:", error);
+            }
+        });
+
+        // Share button
+        document.getElementById('shareBtn').addEventListener('click', async () => {
+            const url = window.location.href;
+            const title = document.getElementById('detailTitle').textContent;
+            
+            if (navigator.share) {
+                try {
+                    await navigator.share({
+                        title: title,
+                        url: url
+                    });
+                } catch (error) {
+                    console.log('Error sharing:', error);
+                }
+            } else {
+                // Fallback: copy to clipboard
+                navigator.clipboard.writeText(url);
+                alert('Link copied to clipboard!');
+            }
+        });
+
+        // Comment submit
+        document.getElementById('commentSubmit').addEventListener('click', async () => {
+            if (!db || !currentBlogId) return;
+            
+            const commentInput = document.getElementById('commentInput');
+            const commentText = commentInput.value.trim();
+            
+            if (!commentText) {
+                alert('Please enter a comment');
+                return;
+            }
+            
+            try {
+                const blogRef = doc(db, "blogs", currentBlogId);
+                const newComment = {
+                    text: commentText,
+                    author: 'Anonymous',
+                    timestamp: Timestamp.now()
+                };
+                
+                await updateDoc(blogRef, {
+                    comments: arrayUnion(newComment)
+                });
+                
+                commentInput.value = '';
+                await loadBlogInteractions(currentBlogId);
+            } catch (error) {
+                console.error("Error posting comment:", error);
+                alert('Error posting comment. Please try again.');
+            }
+        });
 
         function loadLocalBlogs() {
             const blogContainer = document.getElementById('blogContainer');
@@ -1320,6 +1961,10 @@
                 statusDiv.style.display = 'none';
             }, 5000);
         }
+
+        // Show home sections by default
+        document.getElementById('home-section-features').classList.remove('hidden');
+        document.getElementById('home-section-testimonials').classList.remove('hidden');
     </script>
 </body>
 </html>
