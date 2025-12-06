@@ -249,9 +249,8 @@
         }
 
         .drawer-subtitle {
-            font-size: 1rem;
             color: var(--text-secondary);
-            font-weight: 400;
+            font-size: 0.95rem;
         }
 
         .drawer-menu {
@@ -261,86 +260,72 @@
         }
 
         .drawer-menu li {
-            margin-bottom: 0.8rem;
+            margin-bottom: 0.5rem;
         }
 
-        .drawer-menu a, .drawer-menu .theme-toggle-btn {
+        .drawer-link {
             display: flex;
             align-items: center;
             gap: 1.2rem;
             padding: 1.2rem 1.5rem;
             color: var(--text-secondary);
             text-decoration: none;
-            font-size: 1.1rem;
-            font-weight: 500;
+            border-radius: 12px;
             transition: all 0.3s ease;
-            border-radius: 16px;
-            position: relative;
-            overflow: hidden;
-            background: transparent;
-            border: none;
-            width: 100%;
-            cursor: pointer;
-            text-align: left;
+            font-weight: 500;
+            font-size: 1.05rem;
         }
 
-        .drawer-menu a::before, .drawer-menu .theme-toggle-btn::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            height: 100%;
-            width: 4px;
-            background: linear-gradient(180deg, var(--accent-purple), var(--accent-pink));
-            transform: scaleY(0);
-            transition: transform 0.3s ease;
-        }
-
-        .drawer-menu a:hover, .drawer-menu .theme-toggle-btn:hover {
-            color: var(--text-primary);
+        .drawer-link:hover {
             background: rgba(167, 139, 250, 0.1);
-            transform: translateX(8px);
-        }
-
-        .drawer-menu a:hover::before, .drawer-menu .theme-toggle-btn:hover::before {
-            transform: scaleY(1);
+            color: var(--text-primary);
+            transform: translateX(5px);
         }
 
         .drawer-menu-icon {
             font-size: 1.5rem;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(167, 139, 250, 0.1);
-            border-radius: 12px;
-            transition: all 0.3s ease;
+            width: 30px;
+            text-align: center;
         }
 
-        .drawer-menu a:hover .drawer-menu-icon, .drawer-menu .theme-toggle-btn:hover .drawer-menu-icon {
-            background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
-            transform: scale(1.1);
+        .theme-toggle-btn {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            padding: 1.2rem 1.5rem;
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            font-size: 1.05rem;
+            width: 100%;
+            text-align: left;
+        }
+
+        .theme-toggle-btn:hover {
+            background: rgba(167, 139, 250, 0.1);
+            color: var(--text-primary);
+            transform: translateX(5px);
         }
 
         .drawer-footer {
             padding: 2rem 2.5rem;
             border-top: 1px solid var(--border);
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(167, 139, 250, 0.05);
         }
 
         .drawer-footer-title {
-            font-family: 'Syne', sans-serif;
-            font-size: 1rem;
             font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 1rem;
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
         }
 
         .drawer-footer p {
-            font-size: 0.9rem;
             color: var(--text-secondary);
-            line-height: 1.6;
+            font-size: 0.9rem;
             margin-bottom: 1.5rem;
         }
 
@@ -350,25 +335,23 @@
         }
 
         .social-icon {
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(167, 139, 250, 0.1);
+            background: var(--bg-dark);
             border: 1px solid var(--border);
             border-radius: 12px;
-            color: var(--text-secondary);
             text-decoration: none;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             transition: all 0.3s ease;
         }
 
         .social-icon:hover {
             background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
-            color: white;
-            transform: translateY(-3px);
             border-color: transparent;
+            transform: translateY(-3px);
         }
 
         .overlay {
@@ -391,7 +374,7 @@
         }
 
         .page-section {
-            display: block;
+            min-height: 100vh;
         }
 
         .page-section.hidden {
@@ -617,7 +600,7 @@
 
         section {
             padding: 6rem 2rem;
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
@@ -654,75 +637,54 @@
             margin: 0 auto;
         }
 
-        /* Tag Section for Blogs */
-        .tag-section {
-            margin-bottom: 4rem;
-        }
-
-        .tag-header {
-            font-family: 'Syne', sans-serif;
-            font-size: 2rem;
-            color: var(--accent-purple);
-            margin-bottom: 2rem;
-            padding-left: 1rem;
-            border-left: 4px solid var(--accent-purple);
-        }
-
-        /* Horizontal Cascading Blogs */
-        .blogs-horizontal {
+        /* HubSpot-Style Blog Grid */
+        .blog-filters {
             display: flex;
-            gap: 2rem;
-            overflow-x: auto;
-            padding: 2rem 0;
-            scroll-behavior: smooth;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
         }
 
-        .blogs-horizontal::-webkit-scrollbar {
-            height: 8px;
+        .filter-btn {
+            padding: 0.8rem 1.8rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 25px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            font-size: 0.95rem;
         }
 
-        .blogs-horizontal::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
+        .filter-btn:hover {
+            border-color: var(--accent-purple);
+            color: var(--accent-purple);
         }
 
-        .blogs-horizontal::-webkit-scrollbar-thumb {
-            background: linear-gradient(90deg, var(--accent-purple), var(--accent-pink));
-            border-radius: 10px;
+        .filter-btn.active {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
+            color: white;
+            border-color: transparent;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 3rem;
         }
 
         .blog-card {
-            min-width: 350px;
-            max-width: 350px;
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: 20px;
             overflow: hidden;
             transition: all 0.4s ease;
-            position: relative;
             cursor: pointer;
-            opacity: 0;
-            transform: translateX(50px);
-            animation: slideInRight 0.6s ease forwards;
+            position: relative;
         }
-
-        @keyframes slideInRight {
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        .blog-card:nth-child(1) { animation-delay: 0.1s; }
-        .blog-card:nth-child(2) { animation-delay: 0.2s; }
-        .blog-card:nth-child(3) { animation-delay: 0.3s; }
-        .blog-card:nth-child(4) { animation-delay: 0.4s; }
-        .blog-card:nth-child(5) { animation-delay: 0.5s; }
-        .blog-card:nth-child(6) { animation-delay: 0.6s; }
-        .blog-card:nth-child(7) { animation-delay: 0.7s; }
-        .blog-card:nth-child(8) { animation-delay: 0.8s; }
-        .blog-card:nth-child(9) { animation-delay: 0.9s; }
-        .blog-card:nth-child(n+10) { animation-delay: 1s; }
 
         .blog-card::before {
             content: '';
@@ -737,7 +699,7 @@
         }
 
         .blog-card:hover {
-            transform: translateY(-10px) scale(1.02);
+            transform: translateY(-10px);
             border-color: var(--accent-purple);
             box-shadow: 0 20px 60px rgba(167, 139, 250, 0.3);
         }
@@ -746,21 +708,35 @@
             transform: scaleX(1);
         }
 
+        .blog-card.featured {
+            grid-column: span 2;
+        }
+
         .blog-image {
             width: 100%;
-            height: 200px;
+            height: 280px;
             background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3rem;
+            font-size: 4rem;
             overflow: hidden;
+            position: relative;
+        }
+
+        .blog-card.featured .blog-image {
+            height: 400px;
         }
 
         .blog-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .blog-card:hover .blog-image img {
+            transform: scale(1.05);
         }
 
         .blog-content {
@@ -772,6 +748,7 @@
             gap: 1rem;
             margin-bottom: 1rem;
             flex-wrap: wrap;
+            align-items: center;
         }
 
         .blog-date {
@@ -793,6 +770,10 @@
             font-size: 1.5rem;
             margin-bottom: 1rem;
             line-height: 1.4;
+        }
+
+        .blog-card.featured h3 {
+            font-size: 2rem;
         }
 
         .blog-card p {
@@ -1183,6 +1164,8 @@
             .about-grid { grid-template-columns: 1fr; }
             .features-grid { grid-template-columns: 1fr; }
             .testimonials-grid { grid-template-columns: 1fr; }
+            .blog-grid { grid-template-columns: 1fr; }
+            .blog-card.featured { grid-column: span 1; }
         }
 
         @media (max-width: 768px) {
@@ -1196,16 +1179,15 @@
             .stats-grid { grid-template-columns: 1fr; }
             .contact-container { padding: 2rem; }
             .cta-buttons { flex-direction: column; }
-            .blog-card { min-width: 280px; max-width: 280px; }
             .blog-card h3 { font-size: 1.2rem; }
             .blog-card p { font-size: 0.9rem; }
             .blog-detail-header h1 { font-size: 2rem; }
             .blog-detail-content { font-size: 1rem; }
-            .tag-header { font-size: 1.5rem; }
             .feature-card { padding: 2rem; }
             .testimonial-card { padding: 2rem; }
             .blog-interactions { gap: 1rem; }
             .interaction-btn { padding: 0.6rem 1rem; font-size: 0.9rem; }
+            .blog-grid { grid-template-columns: 1fr; gap: 2rem; }
         }
 
         @media (min-width: 1025px) {
@@ -1384,7 +1366,12 @@
             <h2 class="section-title">Recent Articles</h2>
             <p class="section-description">Fresh content, hot takes, and cool insights 🔥</p>
         </div>
-        <div id="blogContainer"></div>
+        
+        <div class="blog-filters" id="blogFilters">
+            <button class="filter-btn active" data-filter="all">All Posts</button>
+        </div>
+        
+        <div class="blog-grid" id="blogContainer"></div>
     </section>
 
     <!-- Blog Detail Section -->
@@ -1399,15 +1386,18 @@
                 </div>
             </div>
             <div class="blog-detail-image" id="detailImageContainer" style="display: none;">
-                <img id="detailImage" src="" alt="">
+                <img id="detailImage" alt="Blog image">
             </div>
             <div class="blog-detail-content" id="detailContent"></div>
             
-            <!-- Blog Interactions -->
             <div class="blog-interactions">
                 <button class="interaction-btn" id="likeBtn">
                     <span class="icon">❤️</span>
                     <span id="likeCount">0</span> Likes
+                </button>
+                <button class="interaction-btn">
+                    <span class="icon">💬</span>
+                    <span id="commentCount">0</span> Comments
                 </button>
                 <button class="interaction-btn" id="shareBtn">
                     <span class="icon">🔗</span>
@@ -1415,9 +1405,8 @@
                 </button>
             </div>
 
-            <!-- Comments Section -->
             <div class="comments-section">
-                <h3 class="comments-header">Comments (<span id="commentCount">0</span>)</h3>
+                <h3 class="comments-header">Comments</h3>
                 <div class="comment-form">
                     <textarea class="comment-input" id="commentInput" placeholder="Share your thoughts..."></textarea>
                     <button class="comment-submit" id="commentSubmit">Post Comment</button>
@@ -1432,23 +1421,23 @@
         <div class="section-header">
             <div class="section-badge">Get In Touch</div>
             <h2 class="section-title">Let's Connect!</h2>
-            <p class="section-description">Have a question or just want to say hi? Drop me a message! 💌</p>
+            <p class="section-description">Have a question or just want to say hi? Drop me a message!</p>
         </div>
         <div class="contact-container">
             <form id="contactForm">
                 <div class="form-group">
-                    <label for="name">Your Name</label>
-                    <input type="text" id="name" name="name" placeholder="John Doe" required>
+                    <label for="name">Name</label>
+                    <input type="text" id="name" placeholder="Your name" required>
                 </div>
                 <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="your@email.com" required>
                 </div>
                 <div class="form-group">
                     <label for="message">Message</label>
-                    <textarea id="message" name="message" placeholder="Your message here..." required></textarea>
+                    <textarea id="message" placeholder="Your message..." required></textarea>
                 </div>
-                <button type="submit" class="submit-btn">Send Message 🚀</button>
+                <button type="submit" class="submit-btn">Send Message</button>
                 <div class="status-message" id="statusMessage"></div>
             </form>
         </div>
@@ -1456,15 +1445,15 @@
 
     <footer>
         <div class="footer-logo">SUMIT</div>
-        <p class="footer-text">Creating content that matters. One post at a time. ✨<br>☁️ Powered by Firebase Cloud Database</p>
+        <p class="footer-text">Thanks for visiting! Stay creative, stay curious. 🚀</p>
         <div class="footer-bottom">
-            <p>&copy; 2025 Sumit Damor. Made with ❤️ and lots of ☕</p>
+            <p>&copy; 2025 Sumit Damor. All rights reserved.</p>
         </div>
     </footer>
 
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
-        import { getFirestore, collection, addDoc, getDocs, getDoc, doc, query, orderBy, onSnapshot, updateDoc, increment, arrayUnion, Timestamp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+        import { getFirestore, collection, addDoc, getDocs, query, orderBy, doc, getDoc, updateDoc, increment, arrayUnion, Timestamp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 
         const firebaseConfig = {
             apiKey: "AIzaSyDNb2TwqbzyqKJHGiGxMqlg4M2hZVAcSE0",
@@ -1479,59 +1468,30 @@
         let app, db;
         let isFirebaseConfigured = false;
         let currentBlogId = null;
+        let allBlogs = [];
+        let currentFilter = 'all';
 
         try {
             app = initializeApp(firebaseConfig);
             db = getFirestore(app);
             isFirebaseConfigured = true;
-            console.log('✅ Firebase Connected Successfully!');
+            console.log('✅ Firebase Connected!');
             
-            const blogsQuery = query(collection(db, "blogs"), orderBy("date", "desc"));
-            onSnapshot(blogsQuery, () => {
-                loadBlogs();
+            await addDoc(collection(db, "visitors"), {
+                date: new Date().toISOString().split('T')[0],
+                timestamp: new Date().toISOString()
             });
-            
-            loadBlogs();
-            trackVisitor();
         } catch (error) {
             console.error("Firebase error:", error);
-            loadLocalBlogs();
         }
 
-        // Theme Toggle
-        const themeToggle = document.getElementById('themeToggle');
-        const themeIcon = document.getElementById('themeIcon');
-        const themeText = document.getElementById('themeText');
-        const html = document.documentElement;
-
-        // Load saved theme
-        const savedTheme = localStorage.getItem('theme') || 'dark';
-        html.setAttribute('data-theme', savedTheme);
-        updateThemeUI(savedTheme);
-
-        themeToggle.addEventListener('click', () => {
-            const currentTheme = html.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            html.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            updateThemeUI(newTheme);
-        });
-
-        function updateThemeUI(theme) {
-            if (theme === 'dark') {
-                themeIcon.textContent = '🌙';
-                themeText.textContent = 'Dark Mode';
-            } else {
-                themeIcon.textContent = '☀️';
-                themeText.textContent = 'Light Mode';
-            }
-        }
-
-        // Navigation
         const hamburger = document.getElementById('hamburger');
         const drawer = document.getElementById('drawer');
         const overlay = document.getElementById('overlay');
-        const allNavLinks = document.querySelectorAll('[data-section]');
+        const drawerLinks = document.querySelectorAll('.drawer-link');
+        const desktopLinks = document.querySelectorAll('.desktop-menu a');
+        const ctaButtons = document.querySelectorAll('.cta-buttons a');
+        const backButtons = document.querySelectorAll('.back-button');
 
         hamburger.addEventListener('click', () => {
             hamburger.classList.toggle('active');
@@ -1545,57 +1505,65 @@
             overlay.classList.remove('active');
         });
 
-        allNavLinks.forEach(link => {
+        function showSection(sectionName) {
+            document.querySelectorAll('.page-section').forEach(section => {
+                section.classList.add('hidden');
+            });
+
+            const targetSection = document.getElementById(`${sectionName}-section`);
+            if (targetSection) {
+                targetSection.classList.remove('hidden');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            if (sectionName === 'home') {
+                document.getElementById('home-section-features').classList.remove('hidden');
+                document.getElementById('home-section-testimonials').classList.remove('hidden');
+            }
+
+            if (sectionName === 'blog') {
+                loadBlogs();
+            }
+
+            hamburger.classList.remove('active');
+            drawer.classList.remove('active');
+            overlay.classList.remove('active');
+        }
+
+        [...drawerLinks, ...desktopLinks, ...ctaButtons, ...backButtons].forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
                 const section = link.getAttribute('data-section');
-                showSection(section);
-                
-                hamburger.classList.remove('active');
-                drawer.classList.remove('active');
-                overlay.classList.remove('active');
+                if (section) showSection(section);
             });
         });
 
-        function showSection(sectionName) {
-            const sections = document.querySelectorAll('.page-section');
-            sections.forEach(section => {
-                section.classList.add('hidden');
-            });
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeText = document.getElementById('themeText');
+        const html = document.documentElement;
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
             
-            if (sectionName === 'home') {
-                document.getElementById('home-section').classList.remove('hidden');
-                document.getElementById('home-section-features').classList.remove('hidden');
-                document.getElementById('home-section-testimonials').classList.remove('hidden');
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            if (newTheme === 'light') {
+                themeIcon.textContent = '☀️';
+                themeText.textContent = 'Light Mode';
             } else {
-                const targetSection = document.getElementById(`${sectionName}-section`);
-                if (targetSection) {
-                    targetSection.classList.remove('hidden');
-                }
+                themeIcon.textContent = '🌙';
+                themeText.textContent = 'Dark Mode';
             }
-            
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+        });
 
-        async function trackVisitor() {
-            if (!db) return;
-            try {
-                const today = new Date().toISOString().split('T')[0];
-                const visitorId = localStorage.getItem('visitorId') || generateVisitorId();
-                localStorage.setItem('visitorId', visitorId);
-                await addDoc(collection(db, "visitors"), {
-                    visitorId: visitorId,
-                    date: today,
-                    timestamp: new Date().toISOString(),
-                    userAgent: navigator.userAgent
-                });
-            } catch (error) {
-                console.log("Error tracking visitor:", error);
-            }
-        }
-
-        function generateVisitorId() {
-            return 'visitor_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        html.setAttribute('data-theme', savedTheme);
+        if (savedTheme === 'light') {
+            themeIcon.textContent = '☀️';
+            themeText.textContent = 'Light Mode';
         }
 
         async function loadBlogs() {
@@ -1608,104 +1576,122 @@
                 const blogsQuery = query(collection(db, "blogs"), orderBy("date", "desc"));
                 const querySnapshot = await getDocs(blogsQuery);
                 const blogContainer = document.getElementById('blogContainer');
+                const filtersContainer = document.getElementById('blogFilters');
+                
                 blogContainer.innerHTML = '';
+                allBlogs = [];
                 
                 if (querySnapshot.empty) {
                     blogContainer.innerHTML = `
-                        <div class="tag-section">
-                            <div class="blogs-horizontal">
-                                <div class="blog-card">
-                                    <div class="blog-image">🚀</div>
-                                    <div class="blog-content">
-                                        <div class="blog-meta">
-                                            <span class="blog-date">Coming Soon</span>
-                                            <span class="blog-tag">Exciting</span>
-                                        </div>
-                                        <h3>More Content Coming Soon!</h3>
-                                        <p>I'm working on some amazing content for you. Stay tuned! 🎉</p>
-                                    </div>
+                        <div class="blog-card">
+                            <div class="blog-image">🚀</div>
+                            <div class="blog-content">
+                                <div class="blog-meta">
+                                    <span class="blog-date">Coming Soon</span>
+                                    <span class="blog-tag">Exciting</span>
                                 </div>
+                                <h3>More Content Coming Soon!</h3>
+                                <p>I'm working on some amazing content for you. Stay tuned! 🎉</p>
                             </div>
                         </div>
                     `;
                     return;
                 }
                 
-                // Group blogs by tag
-                const blogsByTag = {};
+                // Collect all blogs and tags
+                const tags = new Set(['all']);
                 querySnapshot.forEach((docSnap) => {
                     const blog = { id: docSnap.id, ...docSnap.data() };
-                    const tag = blog.tag || 'Uncategorized';
-                    
-                    if (!blogsByTag[tag]) {
-                        blogsByTag[tag] = [];
-                    }
-                    blogsByTag[tag].push(blog);
+                    allBlogs.push(blog);
+                    if (blog.tag) tags.add(blog.tag);
                 });
 
-                // Render blogs by tag sections
-                const emojis = ['📝', '💡', '🚀', '✨', '🎯', '💻', '🎨', '🔥', '⚡', '🌟'];
-                let emojiIndex = 0;
-
-                Object.keys(blogsByTag).forEach(tag => {
-                    const tagSection = document.createElement('div');
-                    tagSection.className = 'tag-section';
-                    
-                    const tagHeader = document.createElement('h3');
-                    tagHeader.className = 'tag-header';
-                    tagHeader.textContent = tag;
-                    tagSection.appendChild(tagHeader);
-                    
-                    const blogsHorizontal = document.createElement('div');
-                    blogsHorizontal.className = 'blogs-horizontal';
-                    
-                    blogsByTag[tag].forEach(blog => {
-                        const blogCard = document.createElement('div');
-                        blogCard.className = 'blog-card';
-                        blogCard.onclick = () => showBlogDetail(blog);
-                        
-                        const dateStr = blog.date ? new Date(blog.date).toLocaleDateString('en-US', { 
-                            year: 'numeric', 
-                            month: 'short', 
-                            day: 'numeric' 
-                        }) : 'No date';
-                        
-                        const emoji = emojis[emojiIndex % emojis.length];
-                        emojiIndex++;
-                        
-                        const excerpt = blog.content.length > 120 
-                            ? blog.content.substring(0, 120) + '...' 
-                            : blog.content;
-                        
-                        const imageHTML = blog.imageUrl 
-                            ? `<img src="${blog.imageUrl}" alt="${blog.title}">`
-                            : emoji;
-                        
-                        blogCard.innerHTML = `
-                            <div class="blog-image">${imageHTML}</div>
-                            <div class="blog-content">
-                                <div class="blog-meta">
-                                    <span class="blog-date">${dateStr}</span>
-                                    <span class="blog-tag">${blog.tag || 'New'}</span>
-                                </div>
-                                <h3>${blog.title}</h3>
-                                <p>${excerpt}</p>
-                                <a href="#" class="read-more">Read More →</a>
-                            </div>
-                        `;
-                        
-                        blogsHorizontal.appendChild(blogCard);
-                    });
-                    
-                    tagSection.appendChild(blogsHorizontal);
-                    blogContainer.appendChild(tagSection);
+                // Create filter buttons
+                filtersContainer.innerHTML = '';
+                tags.forEach(tag => {
+                    const btn = document.createElement('button');
+                    btn.className = `filter-btn ${tag === 'all' ? 'active' : ''}`;
+                    btn.setAttribute('data-filter', tag);
+                    btn.textContent = tag === 'all' ? 'All Posts' : tag;
+                    btn.addEventListener('click', () => filterBlogs(tag));
+                    filtersContainer.appendChild(btn);
                 });
 
+                renderBlogs(allBlogs);
                 document.getElementById('articlesCount').textContent = querySnapshot.size;
             } catch (error) {
                 console.error("Error loading blogs:", error);
                 loadLocalBlogs();
             }
+        }
+
+        function filterBlogs(tag) {
+            currentFilter = tag;
+            
+            // Update active filter button
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.getAttribute('data-filter') === tag) {
+                    btn.classList.add('active');
+                }
+            });
+
+            // Filter and render blogs
+            const filtered = tag === 'all' 
+                ? allBlogs 
+                : allBlogs.filter(blog => blog.tag === tag);
+            
+            renderBlogs(filtered);
+        }
+
+        function renderBlogs(blogs) {
+            const blogContainer = document.getElementById('blogContainer');
+            blogContainer.innerHTML = '';
+
+            const emojis = ['📝', '💡', '🚀', '✨', '🎯', '💻', '🎨', '🔥', '⚡', '🌟'];
+            
+            blogs.forEach((blog, index) => {
+                const blogCard = document.createElement('div');
+                blogCard.className = 'blog-card';
+                
+                // Make first blog featured
+                if (index === 0 && currentFilter === 'all') {
+                    blogCard.classList.add('featured');
+                }
+                
+                blogCard.onclick = () => showBlogDetail(blog);
+                
+                const dateStr = blog.date ? new Date(blog.date).toLocaleDateString('en-US', { 
+                    year: 'numeric', 
+                    month: 'short', 
+                    day: 'numeric' 
+                }) : 'No date';
+                
+                const emoji = emojis[index % emojis.length];
+                
+                const excerpt = blog.content.length > 150 
+                    ? blog.content.substring(0, 150) + '...' 
+                    : blog.content;
+                
+                const imageHTML = blog.imageUrl 
+                    ? `<img src="${blog.imageUrl}" alt="${blog.title}">`
+                    : emoji;
+                
+                blogCard.innerHTML = `
+                    <div class="blog-image">${imageHTML}</div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="blog-date">${dateStr}</span>
+                            <span class="blog-tag">${blog.tag || 'New'}</span>
+                        </div>
+                        <h3>${blog.title}</h3>
+                        <p>${excerpt}</p>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                `;
+                
+                blogContainer.appendChild(blogCard);
+            });
         }
 
         async function showBlogDetail(blog) {
@@ -1905,21 +1891,16 @@
         function loadLocalBlogs() {
             const blogContainer = document.getElementById('blogContainer');
             blogContainer.innerHTML = `
-                <div class="tag-section">
-                    <h3 class="tag-header">Welcome</h3>
-                    <div class="blogs-horizontal">
-                        <div class="blog-card">
-                            <div class="blog-image">📝</div>
-                            <div class="blog-content">
-                                <div class="blog-meta">
-                                    <span class="blog-date">Dec 4, 2025</span>
-                                    <span class="blog-tag">Welcome</span>
-                                </div>
-                                <h3>Welcome to My Blog!</h3>
-                                <p>This is the beginning of something awesome. Stay tuned for amazing content coming your way!</p>
-                                <a href="#" class="read-more">Read More →</a>
-                            </div>
+                <div class="blog-card featured">
+                    <div class="blog-image">📝</div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="blog-date">Dec 6, 2025</span>
+                            <span class="blog-tag">Welcome</span>
                         </div>
+                        <h3>Welcome to My Blog!</h3>
+                        <p>This is the beginning of something awesome. Stay tuned for amazing content coming your way!</p>
+                        <a href="#" class="read-more">Read More →</a>
                     </div>
                 </div>
             `;
