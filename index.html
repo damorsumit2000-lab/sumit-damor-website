@@ -177,7 +177,7 @@
         }
 
         .hero-content {
-            max-width: 900px;
+            max-width: 800px;
         }
 
         .hero-badge {
@@ -206,9 +206,9 @@
 
         .hero h1 {
             font-family: 'Syne', sans-serif;
-            font-size: 4.5rem;
+            font-size: 3.5rem;
             font-weight: 800;
-            line-height: 1.1;
+            line-height: 1.2;
             margin-bottom: 1.5rem;
             animation: fadeInUp 0.6s ease 0.2s both;
         }
@@ -221,10 +221,10 @@
         }
 
         .hero p {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             color: var(--text-secondary);
-            margin-bottom: 3rem;
-            line-height: 1.8;
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
             animation: fadeInUp 0.6s ease 0.4s both;
         }
 
@@ -268,55 +268,15 @@
             transform: translateY(-3px);
         }
 
-        /* Stats Section */
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            max-width: 1000px;
-            margin: 4rem auto 0;
-            animation: fadeInUp 0.6s ease 0.8s both;
-        }
-
-        .stat-card {
-            background: var(--bg-card);
-            padding: 2rem;
-            border-radius: 20px;
-            border: 1px solid var(--border);
-            text-align: center;
-            transition: all 0.3s;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-purple);
-        }
-
-        .stat-number {
-            font-family: 'Syne', sans-serif;
-            font-size: 2.5rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
         /* Section Styles */
-        .section-hidden {
-            display: none;
-        }
-
         section {
             padding: 6rem 2rem;
             max-width: 1400px;
             margin: 0 auto;
+        }
+
+        .section-hidden {
+            display: none;
         }
 
         .section-header {
@@ -326,33 +286,30 @@
 
         .section-badge {
             display: inline-block;
-            padding: 0.4rem 1.2rem;
+            padding: 0.5rem 1.5rem;
             background: rgba(167, 139, 250, 0.1);
             border: 1px solid rgba(167, 139, 250, 0.3);
             border-radius: 50px;
             color: var(--accent-purple);
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             font-weight: 600;
             margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
         .section-title {
             font-family: 'Syne', sans-serif;
-            font-size: 3rem;
-            font-weight: 700;
+            font-size: 2.5rem;
             margin-bottom: 1rem;
         }
 
         .section-description {
-            font-size: 1.1rem;
             color: var(--text-secondary);
+            font-size: 1.1rem;
             max-width: 600px;
             margin: 0 auto;
         }
 
-        /* HubSpot-Style Blog Grid - COMPACT VERSION */
+        /* Blog Section */
         .blog-filters {
             display: flex;
             gap: 1rem;
@@ -362,41 +319,35 @@
         }
 
         .filter-btn {
-            padding: 0.8rem 1.8rem;
+            padding: 0.6rem 1.5rem;
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: 25px;
             color: var(--text-secondary);
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.3s;
             font-weight: 500;
-            font-size: 0.95rem;
         }
 
-        .filter-btn:hover {
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: rgba(167, 139, 250, 0.2);
             border-color: var(--accent-purple);
             color: var(--accent-purple);
-        }
-
-        .filter-btn.active {
-            background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
-            color: white;
-            border-color: transparent;
         }
 
         .blog-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 1.5rem;
-            margin-bottom: 3rem;
         }
 
         .blog-card {
             background: var(--bg-card);
-            border: 1px solid var(--border);
             border-radius: 16px;
+            border: 1px solid var(--border);
             overflow: hidden;
-            transition: all 0.4s ease;
+            transition: all 0.3s ease;
             cursor: pointer;
             position: relative;
         }
@@ -423,10 +374,6 @@
             transform: scaleX(1);
         }
 
-        .blog-card.featured {
-            grid-column: span 2;
-        }
-
         .blog-image {
             width: 100%;
             height: 180px;
@@ -437,10 +384,6 @@
             font-size: 3rem;
             overflow: hidden;
             position: relative;
-        }
-
-        .blog-card.featured .blog-image {
-            height: 280px;
         }
 
         .blog-image img {
@@ -487,10 +430,6 @@
             line-height: 1.4;
         }
 
-        .blog-card.featured h3 {
-            font-size: 1.6rem;
-        }
-
         .blog-card p {
             color: var(--text-secondary);
             line-height: 1.6;
@@ -517,7 +456,7 @@
         .blog-detail-page {
             max-width: 900px;
             margin: 0 auto;
-            padding: 8rem 2rem 4rem;
+            padding: 6rem 2rem 4rem;
         }
 
         .back-button {
@@ -538,13 +477,36 @@
             transform: translateX(-5px);
         }
 
+        /* Blog Header Background Image - 200px height */
+        .blog-header-bg {
+            width: 100%;
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .blog-header-bg::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 50%;
+            background: linear-gradient(to top, rgba(10, 10, 15, 0.8), transparent);
+        }
+
         .blog-detail-header {
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
         }
 
         .blog-detail-header h1 {
             font-family: 'Syne', sans-serif;
-            font-size: 3rem;
+            font-size: 2.5rem;
             margin-bottom: 1rem;
             line-height: 1.2;
         }
@@ -557,22 +519,8 @@
             flex-wrap: wrap;
         }
 
-        .blog-detail-image {
-            width: 100%;
-            max-height: 500px;
-            border-radius: 20px;
-            overflow: hidden;
-            margin-bottom: 3rem;
-        }
-
-        .blog-detail-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
         .blog-detail-content {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             line-height: 1.8;
             color: var(--text-secondary);
             margin-bottom: 3rem;
@@ -700,9 +648,8 @@
         }
 
         .skill-card:hover {
-            transform: translateY(-10px);
             border-color: var(--accent-purple);
-            box-shadow: 0 20px 60px rgba(167, 139, 250, 0.2);
+            transform: translateY(-5px);
         }
 
         .skill-icon {
@@ -718,14 +665,14 @@
 
         .skill-card p {
             color: var(--text-secondary);
-            line-height: 1.8;
+            line-height: 1.7;
         }
 
         /* Projects Section */
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
         }
 
         .project-card {
@@ -737,14 +684,12 @@
         }
 
         .project-card:hover {
-            transform: translateY(-10px);
             border-color: var(--accent-purple);
-            box-shadow: 0 20px 60px rgba(167, 139, 250, 0.2);
+            transform: translateY(-5px);
         }
 
         .project-image {
-            width: 100%;
-            height: 250px;
+            height: 200px;
             background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
             display: flex;
             align-items: center;
@@ -764,13 +709,13 @@
 
         .project-content p {
             color: var(--text-secondary);
-            line-height: 1.8;
+            line-height: 1.7;
             margin-bottom: 1.5rem;
         }
 
         .project-tags {
             display: flex;
-            gap: 0.8rem;
+            gap: 0.5rem;
             flex-wrap: wrap;
             margin-bottom: 1.5rem;
         }
@@ -790,17 +735,16 @@
 
         .project-link {
             padding: 0.8rem 1.5rem;
-            background: transparent;
+            background: rgba(167, 139, 250, 0.1);
             border: 1px solid var(--accent-purple);
+            border-radius: 10px;
             color: var(--accent-purple);
             text-decoration: none;
-            border-radius: 10px;
             transition: all 0.3s;
-            font-weight: 500;
         }
 
         .project-link:hover {
-            background: rgba(167, 139, 250, 0.1);
+            background: rgba(167, 139, 250, 0.2);
             transform: translateY(-2px);
         }
 
@@ -945,10 +889,6 @@
                 grid-template-columns: 1fr;
             }
 
-            .blog-card.featured {
-                grid-column: span 1;
-            }
-
             .blog-detail-header h1 {
                 font-size: 2rem;
             }
@@ -959,6 +899,10 @@
 
             .skills-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .blog-header-bg {
+                height: 150px;
             }
         }
 
@@ -977,6 +921,10 @@
 
             .blog-card h3 {
                 font-size: 1.1rem;
+            }
+
+            .blog-header-bg {
+                height: 120px;
             }
         }
     </style>
@@ -1013,20 +961,6 @@
             <div class="cta-buttons">
                 <a href="#" class="btn btn-primary" onclick="showSection('projects')">View My Work</a>
                 <a href="#" class="btn btn-secondary" onclick="showSection('contact')">Get In Touch</a>
-            </div>
-            <div class="stats">
-                <div class="stat-card">
-                    <div class="stat-number" id="articlesCount">0</div>
-                    <div class="stat-label">Articles Written</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">5+</div>
-                    <div class="stat-label">Projects Completed</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">3+</div>
-                    <div class="stat-label">Years Experience</div>
-                </div>
             </div>
         </div>
     </section>
@@ -1123,7 +1057,7 @@
         <div class="section-header">
             <div class="section-badge">✍️ Latest Posts</div>
             <h2 class="section-title">Blog & Articles</h2>
-            <p class="section-description">Thoughts, tutorials, and insights on web development</p>
+            <p class="section-description">Thoughts on male mind wellness, personal growth, and development</p>
         </div>
         
         <div class="blog-filters" id="blogFilters">
@@ -1140,16 +1074,15 @@
         <div class="blog-detail-page">
             <button class="back-button" onclick="showSection('blog')">← Back to Blog</button>
             
+            <!-- 200px Background Image Header -->
+            <div class="blog-header-bg" id="blogHeaderBg"></div>
+
             <div class="blog-detail-header">
                 <span class="blog-tag" id="detailTag">Tech</span>
                 <h1 id="detailTitle">Blog Title</h1>
                 <div class="blog-detail-meta">
                     <span id="detailDate">Date</span>
                 </div>
-            </div>
-
-            <div class="blog-detail-image" id="detailImageContainer" style="display: none;">
-                <img id="detailImage" src="" alt="Blog Image">
             </div>
 
             <div class="blog-detail-content" id="detailContent">
@@ -1202,8 +1135,8 @@
                     <label for="message">Message</label>
                     <textarea id="message" required></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary">Send Message</button>
-                <div class="status-message" id="contactStatus"></div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+                <div class="status-message" id="statusMessage"></div>
             </form>
         </div>
     </section>
@@ -1215,95 +1148,78 @@
                 <a href="#" class="social-link">𝕏</a>
                 <a href="#" class="social-link">💼</a>
                 <a href="#" class="social-link">📧</a>
-                <a href="#" class="social-link">🐙</a>
             </div>
-            <p class="footer-text">© 2024 Sumit Damor. Built with ❤️ and ☕</p>
+            <p class="footer-text">© 2024 Sumit Damor. All rights reserved.</p>
         </div>
     </footer>
 
+    <!-- Firebase Configuration -->
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
-        import { getFirestore, collection, addDoc, getDocs, query, orderBy, doc, getDoc, updateDoc, increment, arrayUnion, Timestamp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+        import { getFirestore, collection, addDoc, getDocs, getDoc, doc, query, orderBy, updateDoc, increment, arrayUnion, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 
         const firebaseConfig = {
-            apiKey: "AIzaSyDNb2TwqbzyqKJHGiGxMqlg4M2hZVAcSE0",
-            authDomain: "sumit-blog-db.firebaseapp.com",
-            projectId: "sumit-blog-db",
-            storageBucket: "sumit-blog-db.firebasestorage.app",
-            messagingSenderId: "931102199228",
-            appId: "1:931102199228:web:d16ba2bf4a9e7253966fb9",
-            measurementId: "G-53FHRZV15V"
+            apiKey: "AIzaSyDqJqLPPPPPPPPPPPPPPPPPPPPPPPPPPPP",
+            authDomain: "sumit-damor-website.firebaseapp.com",
+            projectId: "sumit-damor-website",
+            storageBucket: "sumit-damor-website.firebasestorage.app",
+            messagingSenderId: "123456789012",
+            appId: "1:123456789012:web:abcdefghijklmnop"
         };
 
         let app, db;
+        try {
+            app = initializeApp(firebaseConfig);
+            db = getFirestore(app);
+        } catch (error) {
+            console.error("Firebase initialization error:", error);
+        }
+
+        window.db = db;
+        window.collection = collection;
+        window.addDoc = addDoc;
+        window.getDocs = getDocs;
+        window.getDoc = getDoc;
+        window.doc = doc;
+        window.query = query;
+        window.orderBy = orderBy;
+        window.updateDoc = updateDoc;
+        window.increment = increment;
+        window.arrayUnion = arrayUnion;
+        window.serverTimestamp = serverTimestamp;
+    </script>
+
+    <script>
         let allBlogs = [];
         let currentFilter = 'all';
         let currentBlogId = null;
 
-        try {
-            app = initializeApp(firebaseConfig);
-            db = getFirestore(app);
-            console.log('✅ Firebase Connected!');
-            loadBlogs();
-        } catch (error) {
-            console.error("Firebase error:", error);
-            loadLocalBlogs();
-        }
-
         // Theme Toggle
         const themeToggle = document.getElementById('themeToggle');
-        const currentTheme = localStorage.getItem('theme') || 'dark';
-        
-        if (currentTheme === 'light') {
-            document.documentElement.setAttribute('data-theme', 'light');
-            themeToggle.textContent = '☀️';
-        }
+        const html = document.documentElement;
 
         themeToggle.addEventListener('click', () => {
-            const theme = document.documentElement.getAttribute('data-theme');
-            if (theme === 'light') {
-                document.documentElement.setAttribute('data-theme', 'dark');
-                themeToggle.textContent = '🌙';
-                localStorage.setItem('theme', 'dark');
-            } else {
-                document.documentElement.setAttribute('data-theme', 'light');
-                themeToggle.textContent = '☀️';
-                localStorage.setItem('theme', 'light');
-            }
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', newTheme);
+            themeToggle.textContent = newTheme === 'light' ? '☀️' : '🌙';
+            localStorage.setItem('theme', newTheme);
         });
 
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        html.setAttribute('data-theme', savedTheme);
+        themeToggle.textContent = savedTheme === 'light' ? '☀️' : '🌙';
+
         // Section Navigation
-        window.showSection = function(sectionId) {
+        function showSection(sectionId) {
             document.querySelectorAll('section').forEach(section => {
                 section.classList.add('section-hidden');
             });
             document.getElementById(sectionId).classList.remove('section-hidden');
             window.scrollTo({ top: 0, behavior: 'smooth' });
-        };
-
-        // Track Visitors
-        async function trackVisitor() {
-            if (!db) return;
-            
-            try {
-                const today = new Date().toISOString().split('T')[0];
-                const visitorId = localStorage.getItem('visitorId') || 
-                    'visitor_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-                
-                if (!localStorage.getItem('visitorId')) {
-                    localStorage.setItem('visitorId', visitorId);
-                    await addDoc(collection(db, "visitors"), {
-                        id: visitorId,
-                        date: today,
-                        timestamp: Timestamp.now()
-                    });
-                }
-            } catch (error) {
-                console.error("Error tracking visitor:", error);
-            }
         }
 
-        trackVisitor();
+        window.showSection = showSection;
 
         // Load Blogs
         async function loadBlogs() {
@@ -1316,7 +1232,6 @@
                 const filtersContainer = document.getElementById('blogFilters');
                 allBlogs = [];
                 
-                // Collect all blogs and tags
                 const tags = new Set(['all']);
                 querySnapshot.forEach((docSnap) => {
                     const blog = { id: docSnap.id, ...docSnap.data() };
@@ -1324,7 +1239,6 @@
                     if (blog.tag) tags.add(blog.tag);
                 });
 
-                // Create filter buttons
                 filtersContainer.innerHTML = '';
                 tags.forEach(tag => {
                     const btn = document.createElement('button');
@@ -1336,17 +1250,14 @@
                 });
 
                 renderBlogs(allBlogs);
-                document.getElementById('articlesCount').textContent = querySnapshot.size;
             } catch (error) {
                 console.error("Error loading blogs:", error);
-                loadLocalBlogs();
             }
         }
 
         function filterBlogs(tag) {
             currentFilter = tag;
             
-            // Update active filter button
             document.querySelectorAll('.filter-btn').forEach(btn => {
                 btn.classList.remove('active');
                 if (btn.getAttribute('data-filter') === tag) {
@@ -1354,7 +1265,6 @@
                 }
             });
 
-            // Filter and render blogs
             const filtered = tag === 'all' 
                 ? allBlogs 
                 : allBlogs.filter(blog => blog.tag === tag);
@@ -1371,12 +1281,6 @@
             blogs.forEach((blog, index) => {
                 const blogCard = document.createElement('div');
                 blogCard.className = 'blog-card';
-                
-                // Make first blog featured
-                if (index === 0 && currentFilter === 'all') {
-                    blogCard.classList.add('featured');
-                }
-                
                 blogCard.onclick = () => showBlogDetail(blog);
                 
                 const dateStr = blog.date ? new Date(blog.date).toLocaleDateString('en-US', { 
@@ -1386,7 +1290,6 @@
                 }) : 'No date';
                 
                 const emoji = emojis[index % emojis.length];
-                
                 const excerpt = blog.content.length > 120 
                     ? blog.content.substring(0, 120) + '...' 
                     : blog.content;
@@ -1415,6 +1318,15 @@
         async function showBlogDetail(blog) {
             currentBlogId = blog.id;
             
+            // Set background image (200px height)
+            const headerBg = document.getElementById('blogHeaderBg');
+            if (blog.imageUrl) {
+                headerBg.style.backgroundImage = `url('${blog.imageUrl}')`;
+                headerBg.style.display = 'block';
+            } else {
+                headerBg.style.display = 'none';
+            }
+            
             document.getElementById('detailTag').textContent = blog.tag || 'Uncategorized';
             document.getElementById('detailTitle').textContent = blog.title;
             
@@ -1425,24 +1337,12 @@
             }) : 'No date';
             document.getElementById('detailDate').textContent = dateStr;
             
-            // Show image if available
-            const imageContainer = document.getElementById('detailImageContainer');
-            const imageElement = document.getElementById('detailImage');
-            if (blog.imageUrl) {
-                imageElement.src = blog.imageUrl;
-                imageContainer.style.display = 'block';
-            } else {
-                imageContainer.style.display = 'none';
-            }
-            
             const formattedContent = blog.content.split('\n').map(para => 
                 para.trim() ? `<p>${para}</p>` : ''
             ).join('');
             document.getElementById('detailContent').innerHTML = formattedContent;
             
-            // Load likes and comments
             await loadBlogInteractions(blog.id);
-            
             showSection('blog-detail');
         }
 
@@ -1461,7 +1361,6 @@
                     document.getElementById('likeCount').textContent = likeCount;
                     document.getElementById('commentCount').textContent = comments.length;
                     
-                    // Check if user has liked
                     const userId = getUserId();
                     const likedBy = data.likedBy || [];
                     const likeBtn = document.getElementById('likeBtn');
@@ -1471,7 +1370,6 @@
                         likeBtn.classList.remove('liked');
                     }
                     
-                    // Render comments
                     renderComments(comments);
                 }
             } catch (error) {
@@ -1513,154 +1411,121 @@
         function getUserId() {
             let userId = localStorage.getItem('userId');
             if (!userId) {
-                userId = 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+                userId = 'user_' + Math.random().toString(36).substr(2, 9);
                 localStorage.setItem('userId', userId);
             }
             return userId;
         }
 
-        // Like button
+        // Like Button
         document.getElementById('likeBtn').addEventListener('click', async () => {
             if (!db || !currentBlogId) return;
             
             try {
                 const blogRef = doc(db, "blogs", currentBlogId);
-                const userId = getUserId();
                 const blogSnap = await getDoc(blogRef);
                 
                 if (blogSnap.exists()) {
-                    const data = blogSnap.data();
-                    const likedBy = data.likedBy || [];
+                    const userId = getUserId();
+                    const likedBy = blogSnap.data().likedBy || [];
+                    const likeBtn = document.getElementById('likeBtn');
                     
                     if (likedBy.includes(userId)) {
-                        // Unlike
                         await updateDoc(blogRef, {
                             likes: increment(-1),
                             likedBy: likedBy.filter(id => id !== userId)
                         });
+                        likeBtn.classList.remove('liked');
                     } else {
-                        // Like
                         await updateDoc(blogRef, {
                             likes: increment(1),
                             likedBy: arrayUnion(userId)
                         });
+                        likeBtn.classList.add('liked');
                     }
                     
                     await loadBlogInteractions(currentBlogId);
                 }
             } catch (error) {
-                console.error("Error liking blog:", error);
+                console.error("Error toggling like:", error);
             }
         });
 
-        // Share button
-        document.getElementById('shareBtn').addEventListener('click', async () => {
+        // Share Button
+        document.getElementById('shareBtn').addEventListener('click', () => {
             const url = window.location.href;
-            const title = document.getElementById('detailTitle').textContent;
-            
             if (navigator.share) {
-                try {
-                    await navigator.share({
-                        title: title,
-                        url: url
-                    });
-                } catch (error) {
-                    console.log('Error sharing:', error);
-                }
+                navigator.share({
+                    title: document.getElementById('detailTitle').textContent,
+                    url: url
+                });
             } else {
-                // Fallback: copy to clipboard
                 navigator.clipboard.writeText(url);
                 alert('Link copied to clipboard!');
             }
         });
 
-        // Comment submit
+        // Comment Submit
         document.getElementById('commentSubmit').addEventListener('click', async () => {
             if (!db || !currentBlogId) return;
             
             const commentInput = document.getElementById('commentInput');
             const commentText = commentInput.value.trim();
             
-            if (!commentText) {
-                alert('Please enter a comment');
-                return;
-            }
+            if (!commentText) return;
             
             try {
                 const blogRef = doc(db, "blogs", currentBlogId);
-                const newComment = {
-                    text: commentText,
-                    author: 'Anonymous',
-                    timestamp: Timestamp.now()
-                };
-                
                 await updateDoc(blogRef, {
-                    comments: arrayUnion(newComment)
+                    comments: arrayUnion({
+                        author: 'Anonymous',
+                        text: commentText,
+                        timestamp: serverTimestamp()
+                    })
                 });
                 
                 commentInput.value = '';
                 await loadBlogInteractions(currentBlogId);
             } catch (error) {
                 console.error("Error posting comment:", error);
-                alert('Error posting comment. Please try again.');
             }
         });
-
-        function loadLocalBlogs() {
-            const blogContainer = document.getElementById('blogContainer');
-            blogContainer.innerHTML = `
-                <div class="blog-card featured">
-                    <div class="blog-image">📝</div>
-                    <div class="blog-content">
-                        <div class="blog-meta">
-                            <span class="blog-date">Dec 6, 2025</span>
-                            <span class="blog-tag">Welcome</span>
-                        </div>
-                        <h3>Welcome to My Blog</h3>
-                        <p>This is a placeholder blog post. Connect to Firebase to see real blog posts!</p>
-                        <a href="#" class="read-more">Read More →</a>
-                    </div>
-                </div>
-            `;
-        }
 
         // Contact Form
         document.getElementById('contactForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             
+            if (!db) return;
+            
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const message = document.getElementById('message').value;
-            const statusDiv = document.getElementById('contactStatus');
-            
-            if (!db) {
-                statusDiv.textContent = 'Firebase not connected. Please try again later.';
-                statusDiv.className = 'status-message error';
-                return;
-            }
+            const statusMessage = document.getElementById('statusMessage');
             
             try {
                 await addDoc(collection(db, "contacts"), {
                     name,
                     email,
                     message,
-                    timestamp: Timestamp.now()
+                    timestamp: serverTimestamp()
                 });
                 
-                statusDiv.textContent = 'Message sent successfully! I\'ll get back to you soon.';
-                statusDiv.className = 'status-message success';
-                
+                statusMessage.textContent = 'Message sent successfully!';
+                statusMessage.className = 'status-message success';
                 document.getElementById('contactForm').reset();
                 
                 setTimeout(() => {
-                    statusDiv.style.display = 'none';
-                }, 5000);
+                    statusMessage.style.display = 'none';
+                }, 3000);
             } catch (error) {
                 console.error("Error sending message:", error);
-                statusDiv.textContent = 'Error sending message. Please try again.';
-                statusDiv.className = 'status-message error';
+                statusMessage.textContent = 'Error sending message. Please try again.';
+                statusMessage.className = 'status-message error';
             }
         });
+
+        // Initialize
+        loadBlogs();
     </script>
 </body>
 </html>
