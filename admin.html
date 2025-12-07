@@ -93,50 +93,27 @@
             resize: vertical;
         }
 
-        .image-upload-area {
-            border: 2px dashed #27272a;
-            border-radius: 12px;
-            padding: 2rem;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
+        .image-url-hint {
+            font-size: 0.85rem;
+            color: #a1a1aa;
+            margin-top: 0.5rem;
         }
 
-        .image-upload-area:hover {
-            border-color: #a78bfa;
-            background: rgba(167, 139, 250, 0.05);
-        }
-
-        .image-upload-area.has-image {
-            border-color: #4ade80;
-        }
-
-        .image-preview {
-            max-width: 100%;
-            max-height: 300px;
-            border-radius: 12px;
+        .image-preview-container {
             margin-top: 1rem;
             display: none;
         }
 
-        .image-preview.show {
+        .image-preview-container.show {
             display: block;
         }
 
-        .upload-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .upload-text {
-            color: #a1a1aa;
-            margin-bottom: 0.5rem;
-        }
-
-        .upload-hint {
-            font-size: 0.85rem;
-            color: #52525b;
+        .image-preview {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 1px solid #27272a;
         }
 
         .btn-primary {
@@ -334,26 +311,24 @@
                         <label for="tag">Tag/Category</label>
                         <select id="tag" name="tag" required>
                             <option value="">Select a tag</option>
-                            <option value="Tech">Tech</option>
+                            <option value="Mind Wellness">Mind Wellness</option>
+                            <option value="Mental Health">Mental Health</option>
+                            <option value="Personal Growth">Personal Growth</option>
+                            <option value="Productivity">Productivity</option>
+                            <option value="Fitness">Fitness</option>
                             <option value="Lifestyle">Lifestyle</option>
-                            <option value="Tutorial">Tutorial</option>
-                            <option value="News">News</option>
-                            <option value="Review">Review</option>
-                            <option value="Personal">Personal</option>
+                            <option value="Tech">Tech</option>
                             <option value="Other">Other</option>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label>Blog Image (Optional)</label>
-                        <div class="image-upload-area" id="imageUploadArea">
-                            <div class="upload-icon">📷</div>
-                            <div class="upload-text">Click to upload image</div>
-                            <div class="upload-hint">Supports JPG, PNG, GIF (Max 5MB)</div>
-                            <input type="file" id="imageInput" accept="image/*" style="display: none;">
-                            <img id="imagePreview" class="image-preview" alt="Preview">
+                        <label for="imageUrl">Image URL (Optional)</label>
+                        <input type="url" id="imageUrl" name="imageUrl" placeholder="Paste image URL here (e.g., https://example.com/image.jpg)">
+                        <div class="image-url-hint">💡 Tip: Use Unsplash, Imgur, or any direct image link</div>
+                        <div class="image-preview-container" id="imagePreviewContainer">
+                            <img id="imagePreview" class="image-preview" alt="Image preview">
                         </div>
-                        <input type="text" id="imageUrl" placeholder="Or paste image URL" style="margin-top: 1rem;">
                     </div>
 
                     <div class="form-group">
@@ -379,7 +354,6 @@
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
         import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, query, orderBy, onSnapshot } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
-        import { getStorage, ref, uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js';
 
         const firebaseConfig = {
             apiKey: "AIzaSyDNb2TwqbzyqKJHGiGxMqlg4M2hZVAcSE0",
@@ -391,13 +365,11 @@
             measurementId: "G-53FHRZV15V"
         };
 
-        let app, db, storage;
-        let uploadedImageUrl = null;
+        let app, db;
 
         try {
             app = initializeApp(firebaseConfig);
             db = getFirestore(app);
-            storage = getStorage(app);
             console.log('✅ Firebase Connected!');
             
             // Real-time blog updates
@@ -412,56 +384,23 @@
             showStatus('createStatus', 'Firebase connection failed!', 'error');
         }
 
-        // Image Upload
-        const imageUploadArea = document.getElementById('imageUploadArea');
-        const imageInput = document.getElementById('imageInput');
-        const imagePreview = document.getElementById('imagePreview');
+        // Image URL Preview
         const imageUrlInput = document.getElementById('imageUrl');
+        const imagePreview = document.getElementById('imagePreview');
+        const imagePreviewContainer = document.getElementById('imagePreviewContainer');
 
-        imageUploadArea.addEventListener('click', () => {
-            imageInput.click();
-        });
-
-        imageInput.addEventListener('change', async (e) => {
-            const file = e.target.files[0];
-            if (!file) return;
-
-            // Validate file size (5MB)
-            if (file.size > 5 * 1024 * 1024) {
-                alert('File size must be less than 5MB');
-                return;
-            }
-
-            // Show preview
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                imagePreview.src = e.target.result;
-                imagePreview.classList.add('show');
-                imageUploadArea.classList.add('has-image');
-            };
-            reader.readAsDataURL(file);
-
-            // Upload to Firebase Storage
-            try {
-                const storageRef = ref(storage, `blog-images/${Date.now()}_${file.name}`);
-                const snapshot = await uploadBytes(storageRef, file);
-                uploadedImageUrl = await getDownloadURL(snapshot.ref);
-                imageUrlInput.value = uploadedImageUrl;
-                console.log('Image uploaded:', uploadedImageUrl);
-            } catch (error) {
-                console.error('Upload error:', error);
-                alert('Error uploading image. Please try again.');
-            }
-        });
-
-        // Use URL input
         imageUrlInput.addEventListener('input', (e) => {
             const url = e.target.value.trim();
             if (url) {
-                uploadedImageUrl = url;
                 imagePreview.src = url;
-                imagePreview.classList.add('show');
-                imageUploadArea.classList.add('has-image');
+                imagePreviewContainer.classList.add('show');
+                
+                // Handle image load error
+                imagePreview.onerror = () => {
+                    imagePreviewContainer.classList.remove('show');
+                };
+            } else {
+                imagePreviewContainer.classList.remove('show');
             }
         });
 
@@ -472,7 +411,7 @@
             const title = document.getElementById('title').value.trim();
             const tag = document.getElementById('tag').value;
             const content = document.getElementById('content').value.trim();
-            const imageUrl = uploadedImageUrl || imageUrlInput.value.trim();
+            const imageUrl = document.getElementById('imageUrl').value.trim();
 
             if (!title || !tag || !content) {
                 showStatus('createStatus', 'Please fill all required fields!', 'error');
@@ -500,9 +439,7 @@
                 
                 // Reset form
                 document.getElementById('createBlogForm').reset();
-                imagePreview.classList.remove('show');
-                imageUploadArea.classList.remove('has-image');
-                uploadedImageUrl = null;
+                imagePreviewContainer.classList.remove('show');
                 
             } catch (error) {
                 console.error("Error creating blog:", error);
