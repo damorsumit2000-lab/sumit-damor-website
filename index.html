@@ -13,20 +13,28 @@
             --bg-primary: #000000;
             --bg-secondary: #0a0a0a;
             --bg-card: #111111;
+            --bg-hover: #1a1a1a;
             --text-primary: #ffffff;
             --text-secondary: #888888;
+            --text-tertiary: #555555;
             --accent: #ffffff;
             --border: #222222;
+            --border-hover: #333333;
+            --light-grey: #1a1a1a;
         }
 
         [data-theme="light"] {
             --bg-primary: #ffffff;
             --bg-secondary: #fafafa;
             --bg-card: #f5f5f5;
+            --bg-hover: #eeeeee;
             --text-primary: #000000;
             --text-secondary: #666666;
+            --text-tertiary: #999999;
             --accent: #000000;
             --border: #e0e0e0;
+            --border-hover: #cccccc;
+            --light-grey: #f0f0f0;
         }
 
         * {
@@ -109,6 +117,7 @@
 
         .theme-toggle:hover {
             border-color: var(--text-primary);
+            background: var(--bg-hover);
         }
 
         /* Mobile Menu */
@@ -219,7 +228,7 @@
         .hero-badge {
             display: inline-block;
             padding: 0.4rem 1rem;
-            background: transparent;
+            background: var(--light-grey);
             border: 1px solid var(--border);
             border-radius: 50px;
             color: var(--text-secondary);
@@ -227,6 +236,12 @@
             font-weight: 400;
             margin-bottom: 2rem;
             letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+
+        .hero-badge:hover {
+            border-color: var(--border-hover);
+            background: var(--bg-hover);
         }
 
         .hero h1 {
@@ -270,6 +285,7 @@
 
         .btn-primary:hover {
             opacity: 0.9;
+            transform: translateY(-2px);
         }
 
         .btn-secondary {
@@ -280,6 +296,53 @@
 
         .btn-secondary:hover {
             border-color: var(--text-primary);
+            background: var(--bg-hover);
+            transform: translateY(-2px);
+        }
+
+        /* Stats Section */
+        .stats-section {
+            padding: 4rem 2rem;
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .stats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover {
+            border-color: var(--border-hover);
+            background: var(--bg-hover);
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            letter-spacing: -1px;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-weight: 400;
         }
 
         /* Features Section */
@@ -297,7 +360,7 @@
         .section-badge {
             display: inline-block;
             padding: 0.4rem 1rem;
-            background: transparent;
+            background: var(--light-grey);
             border: 1px solid var(--border);
             border-radius: 50px;
             color: var(--text-secondary);
@@ -305,6 +368,12 @@
             font-weight: 400;
             margin-bottom: 1rem;
             letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+
+        .section-badge:hover {
+            border-color: var(--border-hover);
+            background: var(--bg-hover);
         }
 
         .section-title {
@@ -338,7 +407,9 @@
         }
 
         .feature-card:hover {
-            border-color: var(--text-primary);
+            border-color: var(--border-hover);
+            background: var(--bg-hover);
+            transform: translateY(-5px);
         }
 
         .feature-icon {
@@ -357,6 +428,103 @@
             line-height: 1.7;
             font-weight: 300;
             font-size: 0.95rem;
+        }
+
+        /* How It Works Section */
+        .how-it-works-section {
+            padding: 6rem 2rem;
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+        }
+
+        .steps-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            margin-top: 3rem;
+        }
+
+        .step-item {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .step-item:hover {
+            border-color: var(--border-hover);
+            background: var(--bg-hover);
+            transform: translateX(10px);
+        }
+
+        .step-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            min-width: 60px;
+        }
+
+        .step-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+
+        .step-content p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        /* Testimonials Section */
+        .testimonials-section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .testimonial-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            border-color: var(--border-hover);
+            background: var(--bg-hover);
+            transform: translateY(-5px);
+        }
+
+        .testimonial-text {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+        }
+
+        .testimonial-role {
+            color: var(--text-tertiary);
+            font-size: 0.85rem;
+            font-weight: 300;
         }
 
         /* Blog Section */
@@ -403,40 +571,43 @@
             border-radius: 10px;
         }
 
+        .blogs-horizontal::-webkit-scrollbar-thumb:hover {
+            background: var(--border-hover);
+        }
+
+        /* Minimalist Blog Card */
         .blog-card {
             min-width: 350px;
             max-width: 350px;
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: 8px;
-            overflow: hidden;
+            padding: 1.5rem;
             transition: all 0.3s ease;
             cursor: pointer;
+            position: relative;
         }
 
         .blog-card:hover {
-            border-color: var(--text-primary);
+            border-color: var(--border-hover);
+            background: var(--bg-hover);
+            transform: translateY(-5px);
         }
 
-        .blog-image {
-            width: 100%;
-            height: 200px;
-            background: var(--bg-secondary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5rem;
-            overflow: hidden;
-        }
-
-        .blog-image img {
-            width: 100%;
+        .blog-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
             height: 100%;
-            object-fit: cover;
+            background: var(--light-grey);
+            border-radius: 8px 0 0 8px;
+            transition: all 0.3s ease;
         }
 
-        .blog-content {
-            padding: 1.5rem;
+        .blog-card:hover::before {
+            background: var(--text-primary);
         }
 
         .blog-meta {
@@ -444,22 +615,29 @@
             gap: 1rem;
             margin-bottom: 1rem;
             flex-wrap: wrap;
+            align-items: center;
         }
 
         .blog-date {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            font-weight: 300;
+            font-size: 0.8rem;
+            color: var(--text-tertiary);
+            font-weight: 400;
         }
 
         .blog-tag {
             padding: 0.2rem 0.6rem;
-            background: transparent;
+            background: var(--light-grey);
             border: 1px solid var(--border);
             border-radius: 4px;
             font-size: 0.75rem;
             color: var(--text-secondary);
             font-weight: 400;
+            transition: all 0.3s ease;
+        }
+
+        .blog-card:hover .blog-tag {
+            border-color: var(--border-hover);
+            background: var(--bg-hover);
         }
 
         .blog-card h3 {
@@ -467,6 +645,7 @@
             margin-bottom: 0.8rem;
             line-height: 1.4;
             font-weight: 600;
+            color: var(--text-primary);
         }
 
         .blog-card p {
@@ -485,6 +664,11 @@
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .blog-card:hover .read-more {
+            gap: 1rem;
         }
 
         /* Blog Detail Page */
@@ -514,7 +698,9 @@
         }
 
         .back-button:hover {
-            border-color: var(--text-primary);
+            border-color: var(--border-hover);
+            background: var(--bg-hover);
+            transform: translateX(-5px);
         }
 
         .blog-detail-header {
@@ -545,6 +731,7 @@
             border-radius: 8px;
             overflow: hidden;
             margin-bottom: 3rem;
+            border: 1px solid var(--border);
         }
 
         .blog-detail-image img {
@@ -591,8 +778,10 @@
         }
 
         .interaction-btn:hover {
-            border-color: var(--text-primary);
+            border-color: var(--border-hover);
+            background: var(--bg-hover);
             color: var(--text-primary);
+            transform: translateY(-2px);
         }
 
         .interaction-btn.liked {
@@ -622,6 +811,11 @@
             border-radius: 8px;
             padding: 1.5rem;
             margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .comment-form:hover {
+            border-color: var(--border-hover);
         }
 
         .comment-input {
@@ -636,6 +830,7 @@
             resize: vertical;
             min-height: 100px;
             margin-bottom: 1rem;
+            transition: all 0.3s ease;
         }
 
         .comment-input:focus {
@@ -657,6 +852,7 @@
 
         .comment-submit:hover {
             opacity: 0.9;
+            transform: translateY(-2px);
         }
 
         .comments-list {
@@ -670,6 +866,12 @@
             border: 1px solid var(--border);
             border-radius: 8px;
             padding: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .comment-card:hover {
+            border-color: var(--border-hover);
+            background: var(--bg-hover);
         }
 
         .comment-header {
@@ -711,6 +913,11 @@
             border-radius: 8px;
             padding: 2rem;
             margin-top: 3rem;
+            transition: all 0.3s ease;
+        }
+
+        .contact-form:hover {
+            border-color: var(--border-hover);
         }
 
         .form-group {
@@ -735,6 +942,7 @@
             color: var(--text-primary);
             font-size: 0.95rem;
             font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
         }
 
         .form-group input:focus,
@@ -833,6 +1041,19 @@
             .btn {
                 width: 100%;
             }
+
+            .stats-container {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .step-item {
+                flex-direction: column;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -880,6 +1101,86 @@
                     <div class="cta-buttons">
                         <a href="#blogs" class="btn btn-primary" onclick="showSection('blogs')">Explore Resources</a>
                         <a href="#contact" class="btn btn-secondary" onclick="showSection('contact')">Get Support</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Section -->
+            <div class="stats-section">
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-number">10K+</div>
+                        <div class="stat-label">Active Members</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label">Resources</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">95%</div>
+                        <div class="stat-label">Satisfaction Rate</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label">Support Available</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- How It Works Section -->
+            <div class="how-it-works-section">
+                <div class="section-header">
+                    <div class="section-badge">SIMPLE PROCESS</div>
+                    <h2 class="section-title">How It Works</h2>
+                    <p class="section-description">Start your journey to mental wellness in three simple steps.</p>
+                </div>
+                <div class="steps-container">
+                    <div class="step-item">
+                        <div class="step-number">01</div>
+                        <div class="step-content">
+                            <h3>Explore Resources</h3>
+                            <p>Browse our curated collection of articles, guides, and tools designed specifically for men's mental wellness. Find content that resonates with your current challenges and goals.</p>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">02</div>
+                        <div class="step-content">
+                            <h3>Join the Community</h3>
+                            <p>Connect with like-minded men who understand your journey. Share experiences, ask questions, and support each other in a safe, judgment-free environment.</p>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">03</div>
+                        <div class="step-content">
+                            <h3>Track Your Progress</h3>
+                            <p>Set meaningful goals, implement strategies, and celebrate your growth. Build sustainable habits that lead to lasting mental strength and emotional resilience.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Testimonials Section -->
+            <div class="testimonials-section">
+                <div class="section-header">
+                    <div class="section-badge">SUCCESS STORIES</div>
+                    <h2 class="section-title">What Our Members Say</h2>
+                    <p class="section-description">Real stories from men who transformed their lives.</p>
+                </div>
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"This platform gave me the tools and community I needed to work through my anxiety. The resources are practical and the support is genuine."</p>
+                        <div class="testimonial-author">Michael R.</div>
+                        <div class="testimonial-role">Software Engineer</div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"Finally, a space where I can be vulnerable without judgment. The mindfulness techniques have been life-changing for managing stress."</p>
+                        <div class="testimonial-author">David K.</div>
+                        <div class="testimonial-role">Business Owner</div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"The community here understands what it's like. I've learned so much about emotional intelligence and building healthier relationships."</p>
+                        <div class="testimonial-author">James L.</div>
+                        <div class="testimonial-role">Teacher</div>
                     </div>
                 </div>
             </div>
@@ -1170,21 +1471,14 @@
                 day: 'numeric'
             }) : 'No date';
             
-            const imageHtml = blog.imageUrl 
-                ? `<img src="${blog.imageUrl}" alt="${blog.title}">`
-                : '📝';
-            
             card.innerHTML = `
-                <div class="blog-image">${imageHtml}</div>
-                <div class="blog-content">
-                    <div class="blog-meta">
-                        <span class="blog-date">${date}</span>
-                        <span class="blog-tag">${blog.tag || 'Other'}</span>
-                    </div>
-                    <h3>${blog.title}</h3>
-                    <p>${blog.content.substring(0, 120)}...</p>
-                    <a class="read-more">Read More →</a>
+                <div class="blog-meta">
+                    <span class="blog-date">${date}</span>
+                    <span class="blog-tag">${blog.tag || 'Other'}</span>
                 </div>
+                <h3>${blog.title}</h3>
+                <p>${blog.content.substring(0, 120)}...</p>
+                <a class="read-more">Read More →</a>
             `;
             
             return card;
